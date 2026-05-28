@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-A premium, web-based tool for creating professional icons with customizable badges, rich gradients, and fun effects.
+A web-based tool for creating professional icons with customizable badges, rich gradients, and fun effects.
 </p>
 
 <div align="center">
@@ -90,7 +90,7 @@ A premium, web-based tool for creating professional icons with customizable badg
 - **[Cloudflare Pages](https://pages.cloudflare.com/)**: High-performance global hosting and deployment.
 - **[Cloudinary](https://cloudinary.com/)**: Scalable image hosting for shareable URLs.
 - **[Lucide](https://lucide.dev/)**: Beautiful and consistent icon sets.
-- **Google Fonts**: Featuring 'Outfit' and 'Inter' for premium typography.
+- **Google Fonts**: Featuring 'Outfit' and 'Inter' for typography.
 
 ---
 
