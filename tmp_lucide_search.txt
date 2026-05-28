@@ -1,0 +1,60 @@
+=== ArrowLeft 343203
+ArrowDownRightFromCircle:x,ArrowDownRightFromSquare:l0,ArrowDownRightSquare:M0,ArrowDownSquare:p0,ArrowDownToDot:Gt,ArrowDownToLine:Et,ArrowDownUp:It,ArrowDownWideNarrow:H,ArrowDownZA:V,ArrowDownZa:V,ArrowLeft:Qt,ArrowLeftCircle:J,ArrowLeftFromLine:jt,ArrowLeftRight:Nt,ArrowLeftSquare:n0,ArrowLeftToLine:Kt,ArrowRight:th,ArrowRightCircle:t1,ArrowRightFromLine:Jt,ArrowRightLeft:Yt,ArrowRightSquare:o
+
+=== Users 368205
+dCheck:$a,UserRoundCog:ma,UserRoundKey:wC,UserRoundMinus:ya,UserRoundPen:SC,UserRoundPlus:sa,UserRoundSearch:LC,UserRoundX:ga,UserSearch:fC,UserSquare:ta,UserSquare2:aa,UserStar:kC,UserX:PC,UserX2:ga,Users:zC,Users2:ua,UsersRound:ua,Utensils:Ha,UtensilsCrossed:Aa,UtilityPole:FC,Van:DC,Variable:RC,Vault:UC,VectorSquare:qC,Vegan:bC,VenetianMask:TC,Venus:GC,VenusAndMars:OC,Verified:k,Vibrate:WC,Vibra
+
+=== UploadCloud 367780
+,Umbrella:cC,UmbrellaOff:dC,Underline:MC,Undo:nC,Undo2:pC,UndoDot:iC,UnfoldHorizontal:lC,UnfoldVertical:eC,Ungroup:rC,University:va,Unlink:vC,Unlink2:oC,Unlock:L2,UnlockKeyhole:S2,Unplug:$C,Upload:mC,UploadCloud:f1,Usb:yC,User:BC,User2:Ca,UserCheck:sC,UserCheck2:$a,UserCircle:V1,UserCircle2:u1,UserCog:gC,UserCog2:ma,UserKey:CC,UserLock:AC,UserMinus:uC,UserMinus2:ya,UserPen:HC,UserPlus:VC,UserPlus2
+
+=== Maximize 357384
+En,MapPinMinus:Xn,MapPinMinusInside:In,MapPinOff:jn,MapPinPen:k2,MapPinPlus:Kn,MapPinPlusInside:Nn,MapPinSearch:Qn,MapPinX:Yn,MapPinXInside:Jn,MapPinned:_n,MapPlus:al,Mars:dl,MarsStroke:hl,Martini:cl,Maximize:pl,Maximize2:Ml,Medal:il,Megaphone:ll,MegaphoneOff:nl,Meh:el,MemoryStick:ol,Menu:rl,MenuSquare:U0,Merge:vl,MessageCircle:wl,MessageCircleCheck:$l,MessageCircleCode:yl,MessageCircleDashed:ml,M
+
+=== Share2 363037
+:j$,Send:K$,SendHorizonal:_2,SendHorizontal:_2,SendToBack:N$,SeparatorHorizontal:Q$,SeparatorVertical:J$,Server:am,ServerCog:Y$,ServerCrash:_$,ServerOff:x$,Settings:hm,Settings2:tm,Shapes:dm,Share:Mm,Share2:cm,Sheet:pm,Shell:im,ShelvingUnit:nm,Shield:Am,ShieldAlert:em,ShieldBan:lm,ShieldCheck:rm,ShieldClose:a0,ShieldCog:vm,ShieldCogCorner:om,ShieldEllipsis:$m,ShieldHalf:mm,ShieldMinus:sm,ShieldOff
+
+=== ExternalLink 351172
+:X2,Edit3:I2,Egg:Uc,EggFried:bc,EggOff:Tc,Ellipse:Oc,Ellipsis:q1,EllipsisVertical:R1,Equal:Wc,EqualApproximately:Zc,EqualNot:Gc,EqualSquare:F0,Eraser:Ec,EthernetPort:Ic,Euro:Xc,EvCharger:jc,Expand:Nc,ExternalLink:Kc,Eye:Yc,EyeClosed:Qc,EyeOff:Jc,Factory:xc,Fan:_c,FastForward:a7,Feather:t7,Fence:h7,FerrisWheel:d7,File:F7,FileArchive:c7,FileAudio:r,FileAudio2:r,FileAxis3D:b1,FileAxis3d:b1,FileBadge:
+
+=== Copy 345304
+:z4,Blender:F4,Blinds:D4,Blocks:R4,Bluetooth:T4,BluetoothConnected:q4,BluetoothOff:b4,BluetoothSearching:U4,Bold:O4,Bolt:Z4,Bomb:G4,Bone:E4,Book:$5,BookA:W4,BookAlert:I4,BookAudio:X4,BookCheck:j4,BookCopy:N4,BookDashed:F,BookDown:K4,BookHeadphones:Q4,BookHeart:Y4,BookImage:J4,BookKey:_4,BookLock:x4,BookMarked:a5,BookMinus:t5,BookOpen:c5,BookOpenCheck:h5,BookOpenText:d5,BookPlus:M5,BookSearch:p5,Bo
+
+=== Trash2 367269
+wg,Torus:Vg,Touchpad:Lg,TouchpadOff:Sg,TowelRack:fg,TowerControl:Pg,ToyBrick:Bg,Tractor:kg,TrafficCone:zg,Train:la,TrainFront:Dg,TrainFrontTunnel:Fg,TrainTrack:Rg,TramFront:la,Transgender:bg,Trash:Tg,Trash2:qg,TreeDeciduous:Ug,TreePalm:ea,TreePine:Og,Trees:Zg,TrendingDown:Gg,TrendingUp:Eg,TrendingUpDown:Wg,Triangle:jg,TriangleAlert:ra,TriangleDashed:Ig,TriangleRight:Xg,Trophy:Ng,Truck:Qg,TruckElec
+
+=== Upload 349530
+wnload:L1,CloudDrizzle:B6,CloudFog:z6,CloudHail:F6,CloudLightning:D6,CloudMoon:q6,CloudMoonRain:R6,CloudOff:b6,CloudRain:U6,CloudRainWind:T6,CloudSnow:O6,CloudSun:G6,CloudSunRain:Z6,CloudSync:W6,CloudUpload:f1,Cloudy:I6,Clover:X6,Club:j6,Code:N6,Code2:k1,CodeSquare:L0,CodeXml:k1,Coffee:K6,Cog:Q6,Coins:J6,Columns:P1,Columns2:P1,Columns3:B1,Columns3Cog:e,Columns4:Y6,ColumnsSettings:e,Combine:_6,Comm
+
+=== Sliders 352193
+ePieChart:E1,FilePlay:x1,FilePlus:g7,FilePlus2:a2,FilePlusCorner:a2,FileQuestion:t2,FileQuestionMark:t2,FileScan:C7,FileSearch:u7,FileSearch2:h2,FileSearchCorner:h2,FileSignal:d2,FileSignature:Y1,FileSliders:A7,FileSpreadsheet:H7,FileStack:w7,FileSymlink:V7,FileTerminal:S7,FileText:L7,FileType:f7,FileType2:c2,FileTypeCorner:c2,FileUp:k7,FileUser:P7,FileVideo:x1,FileVideo2:M2,FileVideoCamera:M2,Fil
+
+=== ChevronDown 347438
+eck:Md,CheckCheck:dd,CheckCircle:d1,CheckCircle2:c1,CheckLine:cd,CheckSquare:u0,CheckSquare2:A0,ChefHat:id,Cherry:pd,ChessBishop:nd,ChessKing:ld,ChessKnight:od,ChessPawn:ed,ChessQueen:rd,ChessRook:vd,ChevronDown:$d,ChevronDownCircle:M1,ChevronDownSquare:H0,ChevronFirst:md,ChevronLast:yd,ChevronLeft:sd,ChevronLeftCircle:p1,ChevronLeftSquare:V0,ChevronRight:gd,ChevronRightCircle:i1,ChevronRightSquar
+
+=== Info 344111
+ioLines:$h,AudioWaveform:mh,Award:sh,Axe:gh,Axis3D:f,Axis3d:f,Baby:Ch,Backpack:uh,Badge:bh,BadgeAlert:Hh,BadgeCent:Ah,BadgeCheck:k,BadgeDollarSign:Vh,BadgeEuro:wh,BadgeHelp:P,BadgeIndianRupee:Sh,BadgeInfo:Lh,BadgeJapaneseYen:fh,BadgeMinus:kh,BadgePercent:Ph,BadgePlus:Bh,BadgePoundSterling:zh,BadgeQuestionMark:P,BadgeRussianRuble:Fh,BadgeSwissFranc:Dh,BadgeTurkishLira:Rh,BadgeX:qh,BaggageClaim:Th,B
+
+=== RefreshCw 361838
+:Av,ReceiptTurkishLira:Hv,RectangleCircle:Vv,RectangleEllipsis:N2,RectangleGoggles:wv,RectangleHorizontal:Sv,RectangleVertical:Lv,Recycle:fv,Redo:Bv,Redo2:kv,RedoDot:Pv,RefreshCcw:Fv,RefreshCcwDot:zv,RefreshCw:Rv,RefreshCwOff:Dv,Refrigerator:qv,Regex:bv,RemoveFormatting:Tv,Repeat:Gv,Repeat1:Uv,Repeat2:Ov,RepeatOff:Zv,Replace:Ev,ReplaceAll:Wv,Reply:Iv,ReplyAll:jv,Rewind:Xv,Ribbon:Nv,Road:Kv,Rocket:
+
+=== Plus 341614
+AArrowDown:Fa,AArrowUp:Da,ALargeSmall:Ra,Accessibility:qa,Activity:ba,ActivitySquare:d0,AirVent:Ta,Airplay:Ua,AlarmCheck:g,AlarmClock:Za,AlarmClockCheck:g,AlarmClockMinus:C,AlarmClockOff:Oa,AlarmClockPlus:u,AlarmMinus:C,AlarmPlus:u,AlarmSmoke:Ga,Album:Wa,AlertCircle:K,AlertOctagon:F2,AlertTriangle:ra,AlignCenter:Ma,AlignCenterHorizontal:Ea,AlignCenterVertical:Ia,AlignEndHorizontal:Xa,AlignEndVerti
+
+=== Settings 349704
+Rain:Z6,CloudSync:W6,CloudUpload:f1,Cloudy:I6,Clover:X6,Club:j6,Code:N6,Code2:k1,CodeSquare:L0,CodeXml:k1,Coffee:K6,Cog:Q6,Coins:J6,Columns:P1,Columns2:P1,Columns3:B1,Columns3Cog:e,Columns4:Y6,ColumnsSettings:e,Combine:_6,Command:a8,Compass:x6,Component:t8,Computer:h8,ConciergeBell:d8,Cone:M8,Construction:c8,Contact:i8,Contact2:z1,ContactRound:z1,Container:p8,Contrast:n8,Cookie:l8,CookingPot:e8,Co
+
+=== Search 345199
+art:w4,BicepsFlexed:H4,Bike:V4,Binary:S4,Binoculars:L4,Biohazard:f4,Bird:k4,Birdhouse:P4,Bitcoin:B4,Blend:z4,Blender:F4,Blinds:D4,Blocks:R4,Bluetooth:T4,BluetoothConnected:q4,BluetoothOff:b4,BluetoothSearching:U4,Bold:O4,Bolt:Z4,Bomb:G4,Bone:E4,Book:$5,BookA:W4,BookAlert:I4,BookAudio:X4,BookCheck:j4,BookCopy:N4,BookDashed:F,BookDown:K4,BookHeadphones:Q4,BookHeart:Y4,BookImage:J4,BookKey:_4,BookLoc
+
+=== Home 355122
+set:op,Heart:up,HeartCrack:vp,HeartHandshake:$p,HeartMinus:yp,HeartOff:mp,HeartPlus:gp,HeartPulse:sp,HeartX:Cp,Heater:Ap,Helicopter:Hp,HelpCircle:l,HelpingHand:g2,Hexagon:Vp,Highlighter:wp,History:Sp,Home:C2,Hop:fp,HopOff:Lp,Hospital:kp,Hotel:Pp,Hourglass:Bp,House:C2,HouseHeart:zp,HousePlug:Fp,HousePlus:Dp,HouseWifi:Rp,IceCream:A2,IceCream2:u2,IceCreamBowl:u2,IceCreamCone:A2,IdCard:bp,IdCardLanyar
+
+=== Star 341913
+ra,AlignCenter:Ma,AlignCenterHorizontal:Ea,AlignCenterVertical:Ia,AlignEndHorizontal:Xa,AlignEndVertical:ja,AlignHorizontalDistributeCenter:Na,AlignHorizontalDistributeEnd:Ka,AlignHorizontalDistributeStart:Qa,AlignHorizontalJustifyCenter:Ja,AlignHorizontalJustifyEnd:Ya,AlignHorizontalJustifyStart:_a,AlignHorizontalSpaceAround:at,AlignHorizontalSpaceBetween:xa,AlignJustify:pa,AlignLeft:s,AlignRight
+
+=== Heart 345359
+thConnected:q4,BluetoothOff:b4,BluetoothSearching:U4,Bold:O4,Bolt:Z4,Bomb:G4,Bone:E4,Book:$5,BookA:W4,BookAlert:I4,BookAudio:X4,BookCheck:j4,BookCopy:N4,BookDashed:F,BookDown:K4,BookHeadphones:Q4,BookHeart:Y4,BookImage:J4,BookKey:_4,BookLock:x4,BookMarked:a5,BookMinus:t5,BookOpen:c5,BookOpenCheck:h5,BookOpenText:d5,BookPlus:M5,BookSearch:p5,BookTemplate:F,BookText:i5,BookType:n5,BookUp:e5,BookUp2:
+
+=== Rocket 362031
+Dot:zv,RefreshCw:Rv,RefreshCwOff:Dv,Refrigerator:qv,Regex:bv,RemoveFormatting:Tv,Repeat:Gv,Repeat1:Uv,Repeat2:Ov,RepeatOff:Zv,Replace:Ev,ReplaceAll:Wv,Reply:Iv,ReplyAll:jv,Rewind:Xv,Ribbon:Nv,Road:Kv,Rocket:Qv,RockingChair:Jv,RollerCoaster:Yv,Rose:_v,Rotate3D:K2,Rotate3d:K2,RotateCcw:t$,RotateCcwKey:xv,RotateCcwSquare:a$,RotateCw:d$,RotateCwSquare:h$,Route:M$,RouteOff:c$,Router:p$,Rows:Q2,Rows2:Q2
+
