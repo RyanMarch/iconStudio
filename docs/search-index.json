@@ -1,0 +1,15 @@
+[
+  {
+    "id": "get-started",
+    "title": "Get Started",
+    "path": "get-started/",
+    "category": "Basics",
+    "headings": [
+      "Overview",
+      "1. First Section",
+      "2. Second Section"
+    ],
+    "excerpt": "Test description goes here",
+    "lastUpdated": "2026-07-10"
+  }
+]

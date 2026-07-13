@@ -5,7 +5,10 @@
   "main": "script.js",
   "scripts": {
     "build": "mkdir -p dist && cp index.html share-template.html sw.js robots.txt sitemap.xml dist/ && cp -r assets dist/ && esbuild script.js --minify --outfile=dist/script.js && esbuild style.css --minify --outfile=dist/style.css",
-    "dev": "wrangler pages dev ."
+    "dev": "wrangler pages dev .",
+    "docs:init": "node scripts/init-docs.js",
+    "docs:create": "node scripts/add-new-doc.js",
+    "docs:build": "node scripts/generate-docs-index.js"
   },
   "devDependencies": {
     "esbuild": "^0.20.0",

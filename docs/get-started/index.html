@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" data-theme-style="tech">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png?v=2" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg?v=2" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../style.css">
+
+    <title>Get Started — Icon Studio Docs</title>
+    <meta name="description" content="Test description goes here">
+    <meta name="category" content="Basics">
+    <meta name="doc-id" content="get-started">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/docs/get-started/">
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <div class="docs-app-viewport">
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="docs-layout-container">
+            <docs-sidebar src="/docs/nav.json"></docs-sidebar>
+
+            <div class="docs-content-column">
+                <docs-header nav-src="/docs/nav.json"></docs-header>
+
+                <docs-anchor-helper>
+                    <section class="docs-article-body" aria-label="Get Started Guide Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>Get Started Guide</h1>
+                            <p class="lead">
+                                Test description goes here
+                            </p>
+                            <p>
+                                Start writing your new documentation content here.
+                            </p>
+                        </article>
+
+                        <nav class="inline-toc" aria-label="Table of contents">
+                            <div class="toc-title">Table of Contents</div>
+                            <ul class="toc-list">
+                                <li><a href="#section-1">1. First Section</a></li>
+                                <li><a href="#section-2">2. Second Section</a></li>
+                            </ul>
+                        </nav>
+
+                        <hr class="section-divider">
+
+                        <article id="section-1" class="doc-section">
+                            <h2>1. First Section</h2>
+                            <p>
+                                Add details about the first sub-section here.
+                            </p>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="section-2" class="doc-section">
+                            <h2>2. Second Section</h2>
+                            <p>
+                                Add details about the second sub-section here.
+                            </p>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <icon-studio-footer></icon-studio-footer>
+
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>

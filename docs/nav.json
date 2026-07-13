@@ -1,0 +1,17 @@
+[
+  {
+    "section": "Docs",
+    "links": [
+      {
+        "title": "App",
+        "href": "/app/",
+        "id": "app"
+      },
+      {
+        "title": "Help Center",
+        "href": "/docs/",
+        "id": "help-center"
+      }
+    ]
+  }
+]
