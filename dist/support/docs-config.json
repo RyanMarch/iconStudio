@@ -1,0 +1,31 @@
+{
+  "projectName": "Icon Studio",
+  "componentPrefix": "docs",
+  "baseUrl": "https://iconstudio.ryanmarch.me",
+  "faviconDir": "../assets/favicon",
+  "googleFontsUrl": true,
+  "navLinks": [
+    {
+      "title": "App",
+      "href": "/app/",
+      "id": "app"
+    },
+    {
+      "title": "Guides",
+      "href": "/support/",
+      "id": "guides"
+    }
+  ],
+  "footerLinks": [
+    {
+      "title": "Terms",
+      "href": "/terms/",
+      "id": "terms"
+    },
+    {
+      "title": "Privacy",
+      "href": "/privacy/",
+      "id": "privacy"
+    }
+  ]
+}

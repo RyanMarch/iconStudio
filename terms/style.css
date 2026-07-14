@@ -1,0 +1,51 @@
+/* Icon Studio - Terms & Privacy Page Custom Styles */
+/* Standard layout, typography, and theme styles are inherited from support/style.css and style.css */
+
+body.user-docs-page {
+    height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Restrict main sidebar layout container width and center it */
+.user-docs-page .app-container {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 1.5rem !important;
+}
+
+/* Make sure the page can scroll */
+.user-docs-page main.page-container-sidebar {
+    min-height: calc(100vh - 140px) !important;
+}
+
+/* Hide top header logo on desktop for terms page layout to avoid duplicate headers */
+@media (min-width: 1025px) {
+    .user-docs-page .app-header .header-logo {
+        display: none !important;
+    }
+    .user-docs-page .app-header {
+        justify-content: flex-end !important;
+    }
+}
+
+/* Adjust Sidebar CTA card sizing so text is not too large */
+.user-docs-page .cta-card-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.user-docs-page .cta-card-desc {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.user-docs-page .btn-cta-generator {
+    font-size: 0.75rem !important;
+    padding: 0.45rem !important;
+}
