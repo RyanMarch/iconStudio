@@ -108,6 +108,9 @@
                     <div class="base-bg squircle" id="base-bg">
                         <img src="assets/img/base-placeholder.svg" alt="Placeholder Icon" class="base-icon"
                             id="base-img" width="512" height="512" loading="eager">
+                        <div class="base-icon-target" id="base-icon-target" style="display: none;">
+                            <i data-lucide="sparkles"></i>
+                        </div>
                         <div class="base-text" id="base-text">YOUR TEXT</div>
                         <div class="base-effects" id="base-effects"></div>
                         <div class="base-overlay" id="base-overlay"></div>
@@ -155,174 +158,349 @@
         </section>
         <hr class="mobile-divider">
 
-        <!-- Base Controls (Middle Column) -->
-        <section class="controls-section base-controls" aria-label="Base Layer Customization">
-            <div class="control-group">
-                <label>Base Image</label>
-                <div style="display: flex; gap: 0.5rem; width: 100%; align-items: stretch;">
-                    <button id="remove-base-icon" class="danger"
-                        style="width: 40px; display: none; padding: 0; justify-content: center;"
-                        onclick="resetBaseIcon()" title="Remove uploaded image">
-                        <i data-lucide="trash-2"></i>
-                    </button>
-                    <button class="btn-upload" onclick="document.getElementById('base-icon-upload').click()">
-                        <i data-lucide="upload"></i> Upload Image
-                    </button>
-                </div>
-                <input type="file" id="base-icon-upload" accept="image/*" style="display: none"
-                    onchange="handleBaseIconUpload(event)">
+        <!-- Unified Controls Sidebar -->
+        <section class="controls-section sidebar-controls" id="sidebar-controls" aria-label="Editor Sidebar">
+            <!-- Sidebar Tab System Header -->
+            <div class="sidebar-tabs">
+                <button class="tab-btn active" data-tab="base" onclick="switchTab('base')">Base</button>
+                <button class="tab-btn" data-tab="badge" onclick="switchTab('badge')">Badge</button>
+                <button class="tab-btn" data-tab="effects" onclick="switchTab('effects')">Effects</button>
             </div>
 
-            <button class="drawer-trigger mobile-only" id="drawer-trigger" onclick="toggleBaseDrawer()">
-                <i data-lucide="sliders"></i>
-                <span>More Base Layer Options</span>
-                <i data-lucide="chevron-down" class="arrow-icon" style="margin-left:auto"></i>
-            </button>
+            <!-- Base Tab Panel -->
+            <div class="tab-content active" id="tab-panel-base">
+                <div class="control-group">
+                    <label>Base Content</label>
+                    <div class="shape-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 0.35rem;">
+                        <button class="shape-btn shape-btn-sm active" data-base-content-type="image"
+                            onclick="setBaseContentType('image')">Image</button>
+                        <button class="shape-btn shape-btn-sm" data-base-content-type="text"
+                            onclick="setBaseContentType('text')">Text</button>
+                        <button class="shape-btn shape-btn-sm" data-base-content-type="icon"
+                            onclick="setBaseContentType('icon')">Icon</button>
+                    </div>
+                </div>
 
-            <div class="mobile-drawer" id="base-drawer">
-                <div class="drawer-content">
-                    <div class="drawer-scroll-area">
-                        <div class="control-group">
-                            <div class="range-header">
-                                <label for="base-size-input">Base Image Size</label>
-                                <span class="range-val"><span id="base-size-val">80</span>%</span>
-                            </div>
-                            <input type="range" id="base-size-input" min="50" max="100" value="80"
-                                oninput="setBaseSize(this.value)" onpointerup="triggerHaptic()">
-                        </div>
+                <div id="base-image-upload-group" class="control-group">
+                    <label>Base Image</label>
+                    <div style="display: flex; gap: 0.5rem; width: 100%; align-items: stretch;">
+                        <button id="remove-base-icon" class="danger"
+                            style="width: 40px; display: none; padding: 0; justify-content: center;"
+                            onclick="resetBaseIcon()" title="Remove uploaded image">
+                            <i data-lucide="trash-2"></i>
+                        </button>
+                        <button class="btn-upload" onclick="document.getElementById('base-icon-upload').click()">
+                            <i data-lucide="upload"></i> Upload Image
+                        </button>
+                    </div>
+                    <input type="file" id="base-icon-upload" accept="image/*" style="display: none"
+                        onchange="handleBaseIconUpload(event)">
+                </div>
 
-                        <div id="base-gradient-controls">
-                            <div class="compact-row">
-                                <div class="control-group" id="base-colors-group">
-                                    <span class="range-header"
-                                        style="font-weight: 500; font-size: 0.8rem; margin-bottom: 0.35rem; color: var(--text-main);">Base
-                                        Colors</span>
-                                    <div class="color-presets">
-                                        <div class="custom-color-wrapper" title="Base Color 1"
-                                            style="--swatch-color: #3b82f6">
-                                            <input type="color" id="base-bg-color-1" value="#3b82f6"
-                                                oninput="setBaseColor1(this.value)" onchange="triggerHaptic()"
-                                                aria-label="Base Gradient Color 1">
-                                        </div>
-                                        <div class="custom-color-wrapper" title="Base Color 2"
-                                            style="--swatch-color: #1D0945">
-                                            <input type="color" id="base-bg-color-2" value="#1D0945"
-                                                oninput="setBaseColor2(this.value)" onchange="triggerHaptic()"
-                                                aria-label="Base Gradient Color 2">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group" id="base-gradient-type-group">
-                                    <label>Gradient Type</label>
-                                    <div class="shape-grid-2x2">
-                                        <button class="shape-btn shape-btn-sm active" data-grad-type="linear"
-                                            onclick="setBaseGradientType('linear')">Linear</button>
-                                        <button class="shape-btn shape-btn-sm" data-grad-type="radial"
-                                            onclick="setBaseGradientType('radial')">Radial</button>
-                                        <button class="shape-btn shape-btn-sm" data-grad-type="conic"
-                                            onclick="setBaseGradientType('conic')">Conic</button>
-                                        <button class="shape-btn shape-btn-sm" data-grad-type="mesh"
-                                            onclick="setBaseGradientType('mesh')">Mesh</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="control-group" id="base-angle-group">
-                                <div class="range-header">
-                                    <label for="base-angle-input">Gradient Angle</label>
-                                    <span class="range-val"><span id="base-angle-val">90</span>°</span>
-                                </div>
-                                <input type="range" id="base-angle-input" min="0" max="360" value="90"
-                                    oninput="setBaseGradientAngle(this.value)" onpointerup="triggerHaptic()">
+                <div id="base-icon-controls" style="display: none;">
+                    <div class="control-group">
+                        <label for="base-icon-input">Base Icon Picker (<a href="https://lucide.dev/icons" target="_blank"
+                                style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">Lucide</a>)</label>
+                        <div class="icon-picker-wrapper">
+                            <input type="text" id="base-icon-input" name="base-icon-search"
+                                placeholder="e.g. eye, heart, star, shield..." oninput="handleBaseIconInput(this.value)"
+                                autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                                role="combobox" aria-autocomplete="list" aria-expanded="false"
+                                aria-controls="base-icon-dropdown">
+                            <div id="base-icon-dropdown" class="icon-dropdown" role="listbox" aria-label="Icon Suggestions">
                             </div>
                         </div>
+                        <div class="icon-suggestions">
+                            Ex:
+                            <span class="suggestion-tag" onclick="setBaseIconName('star')">star</span>,
+                            <span class="suggestion-tag" onclick="setBaseIconName('heart')">heart</span>,
+                            <span class="suggestion-tag" onclick="setBaseIconName('shield')">shield</span>,
+                            <span class="suggestion-tag" onclick="setBaseIconName('bell')">bell</span>,
+                            <span class="suggestion-tag" onclick="setBaseIconName('settings')">settings</span>,
+                            <span class="suggestion-tag" onclick="setBaseIconName('search')">search</span>
+                        </div>
+                    </div>
 
-                        <div id="base-image-controls" class="hidden">
-                            <div class="control-group">
-                                <div class="range-header">
-                                    <label for="base-zoom-input">Image Zoom</label>
-                                    <span class="range-val"><span id="base-zoom-val">100</span>%</span>
+                    <div class="control-group">
+                        <span class="range-header"
+                            style="font-weight: 500; font-size: 0.8rem; margin-bottom: 0.35rem; color: var(--text-main);">Base Icon Color</span>
+                        <div class="color-presets" id="base-icon-color-presets">
+                            <div class="custom-color-wrapper" id="base-icon-color-ui" title="Custom Base Icon Color"
+                                style="--swatch-color: #ffffff">
+                                <i data-lucide="plus" style="color:white"></i>
+                                <input type="color" id="base-icon-color" value="#ffffff" oninput="setBaseIconColor(this.value)"
+                                    onchange="triggerHaptic()" aria-label="Custom Base Icon Color">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="range-header">
+                            <label for="base-icon-scale-input">Base Icon Scale</label>
+                            <span class="range-val"><span id="base-icon-scale-val">70</span>%</span>
+                        </div>
+                        <input type="range" id="base-icon-scale-input" min="20" max="100" value="70"
+                            oninput="setBaseIconScale(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+                </div>
+
+                <div class="control-group" id="base-text-controls" style="display: none;">
+                    <div class="label-row" style="margin-bottom: 0;">
+                        <label for="base-text-input" style="margin-bottom: 0;">Base Text</label>
+                    </div>
+                    <div class="text-color-row" style="align-items: center; display: flex; gap: 0.5rem;">
+                        <div class="text-input-wrapper" style="position: relative; flex: 1;">
+                            <input type="text" id="base-text-input" oninput="setBaseText(this.value)" maxlength="30"
+                                style="width: 100%; padding-right: 3rem;">
+                            <span class="char-count" id="base-text-count"
+                                style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; opacity: 0.5; pointer-events: none;">0/30</span>
+                        </div>
+                        <div class="custom-color-wrapper rect" id="base-text-color-ui" title="Text Color"
+                            style="--swatch-color: #ffffff; margin: 0; display: none;">
+                            <input type="color" id="base-text-color" value="#ffffff"
+                                oninput="setBaseTextColor(this.value)" onchange="triggerHaptic()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="range-header">
+                        <label for="base-size-input">Base Size</label>
+                        <span class="range-val"><span id="base-size-val">80</span>%</span>
+                    </div>
+                    <input type="range" id="base-size-input" min="50" max="100" value="80"
+                        oninput="setBaseSize(this.value)" onpointerup="triggerHaptic()">
+                </div>
+
+                <div id="base-gradient-controls">
+                    <div class="compact-row">
+                        <div class="control-group" id="base-colors-group">
+                            <span class="range-header"
+                                style="font-weight: 500; font-size: 0.8rem; margin-bottom: 0.35rem; color: var(--text-main);">Base
+                                Colors</span>
+                            <div class="color-presets">
+                                <div class="custom-color-wrapper" title="Base Color 1" style="--swatch-color: #3b82f6">
+                                    <input type="color" id="base-bg-color-1" value="#3b82f6"
+                                        oninput="setBaseColor1(this.value)" onchange="triggerHaptic()"
+                                        aria-label="Base Gradient Color 1">
                                 </div>
-                                <input type="range" id="base-zoom-input" min="100" max="300" value="100"
-                                    oninput="setBaseImageZoom(this.value)" onpointerup="triggerHaptic()">
+                                <div class="custom-color-wrapper" title="Base Color 2" style="--swatch-color: #1D0945">
+                                    <input type="color" id="base-bg-color-2" value="#1D0945"
+                                        oninput="setBaseColor2(this.value)" onchange="triggerHaptic()"
+                                        aria-label="Base Gradient Color 2">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <div class="label-row" style="margin-bottom: 0;">
-                                <label for="base-text-input" style="margin-bottom: 0;">Base Text</label>
-                                <label for="base-text-color" style="margin-bottom: 0;">Color</label>
-                            </div>
-                            <div class="text-color-row" style="align-items: center;">
-                                <div class="text-input-wrapper" style="position: relative; flex: 1;">
-                                    <input type="text" id="base-text-input" oninput="setBaseText(this.value)"
-                                        maxlength="30" style="width: 100%; padding-right: 3rem;">
-                                    <span class="char-count" id="base-text-count"
-                                        style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; opacity: 0.5; pointer-events: none;">0/30</span>
-                                </div>
-                                <div class="custom-color-wrapper rect" id="base-text-color-ui" title="Text Color"
-                                    style="--swatch-color: #ffffff; margin: 0;">
-                                    <input type="color" id="base-text-color" value="#ffffff"
-                                        oninput="setBaseTextColor(this.value)" onchange="triggerHaptic()">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label>Base Shape</label>
+                        <div class="control-group" id="base-gradient-type-group">
+                            <label>Gradient Type</label>
                             <div class="shape-grid-2x2">
-                                <button class="shape-btn shape-btn-sm active" data-base-shape="squircle"
-                                    onclick="setBaseShape('squircle')">Squircle</button>
-                                <button class="shape-btn shape-btn-sm" data-base-shape="square"
-                                    onclick="setBaseShape('square')">Square</button>
-                                <button class="shape-btn shape-btn-sm" data-base-shape="roundrect"
-                                    onclick="setBaseShape('roundrect')">RoundRect</button>
-                                <button class="shape-btn shape-btn-sm" data-base-shape="circle"
-                                    onclick="setBaseShape('circle')">Circle</button>
+                                <button class="shape-btn shape-btn-sm active" data-grad-type="linear"
+                                    onclick="setBaseGradientType('linear')">Linear</button>
+                                <button class="shape-btn shape-btn-sm" data-grad-type="radial"
+                                    onclick="setBaseGradientType('radial')">Radial</button>
+                                <button class="shape-btn shape-btn-sm" data-grad-type="conic"
+                                    onclick="setBaseGradientType('conic')">Conic</button>
+                                <button class="shape-btn shape-btn-sm" data-grad-type="mesh"
+                                    onclick="setBaseGradientType('mesh')">Mesh</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="control-group">
-                            <label>Base Frame</label>
-                            <div class="shape-grid-2x2">
-                                <button class="shape-btn shape-btn-sm active" data-base-frame="none"
-                                    onclick="setBaseFrame('none')">None</button>
-                                <button class="shape-btn shape-btn-sm" data-base-frame="shine"
-                                    onclick="setBaseFrame('shine')">Glossy</button>
-                                <button class="shape-btn shape-btn-sm" data-base-frame="border"
-                                    onclick="setBaseFrame('border')">Border</button>
-                                <button class="shape-btn shape-btn-sm" data-base-frame="metallic"
-                                    onclick="setBaseFrame('metallic')">Metallic</button>
-                                <button class="shape-btn shape-btn-sm" data-base-frame="glass"
-                                    onclick="setBaseFrame('glass')">Glass</button>
-                                <button class="shape-btn shape-btn-sm" data-base-frame="emboss"
-                                    onclick="setBaseFrame('emboss')">Emboss</button>
-                            </div>
+                    <div class="control-group" id="base-angle-group">
+                        <div class="range-header">
+                            <label for="base-angle-input">Gradient Angle</label>
+                            <span class="range-val"><span id="base-angle-val">90</span>°</span>
                         </div>
+                        <input type="range" id="base-angle-input" min="0" max="360" value="90"
+                            oninput="setBaseGradientAngle(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+                </div>
 
-                        <div class="control-group">
-                            <label>Base Effects</label>
-                            <div class="shape-grid effects-grid">
-                                <button class="shape-btn shape-btn-sm" id="effect-noise"
-                                    onclick="toggleBaseEffect('noise')">Noise</button>
-                                <button class="shape-btn shape-btn-sm" id="effect-glow"
-                                    onclick="toggleBaseEffect('glow')">Glow</button>
-                                <button class="shape-btn shape-btn-sm" id="effect-vignette"
-                                    onclick="toggleBaseEffect('vignette')">Vignette</button>
-                                <button class="shape-btn shape-btn-sm" id="effect-deep-fried"
-                                    onclick="toggleBaseEffect('deep-fried')">Deep Fried</button>
-                                <button class="shape-btn shape-btn-sm" id="effect-crt"
-                                    onclick="toggleBaseEffect('crt')">CRT</button>
-                                <button class="shape-btn shape-btn-sm" id="effect-mono"
-                                    onclick="toggleBaseEffect('mono')">Mono</button>
-                            </div>
+                <div id="base-image-controls" class="hidden">
+                    <div class="control-group">
+                        <div class="range-header">
+                            <label for="base-zoom-input">Image Zoom</label>
+                            <span class="range-val"><span id="base-zoom-val">100</span>%</span>
                         </div>
+                        <input type="range" id="base-zoom-input" min="100" max="300" value="100"
+                            oninput="setBaseImageZoom(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+                </div>
+
+
+
+                <div class="control-group">
+                    <label>Base Shape</label>
+                    <div class="shape-grid-2x2">
+                        <button class="shape-btn shape-btn-sm active" data-base-shape="squircle"
+                            onclick="setBaseShape('squircle')">Squircle</button>
+                        <button class="shape-btn shape-btn-sm" data-base-shape="square"
+                            onclick="setBaseShape('square')">Square</button>
+                        <button class="shape-btn shape-btn-sm" data-base-shape="roundrect"
+                            onclick="setBaseShape('roundrect')">RoundRect</button>
+                        <button class="shape-btn shape-btn-sm" data-base-shape="circle"
+                            onclick="setBaseShape('circle')">Circle</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Base Frame</label>
+                    <div class="shape-grid-2x2">
+                        <button class="shape-btn shape-btn-sm active" data-base-frame="none"
+                            onclick="setBaseFrame('none')">None</button>
+                        <button class="shape-btn shape-btn-sm" data-base-frame="shine"
+                            onclick="setBaseFrame('shine')">Glossy</button>
+                        <button class="shape-btn shape-btn-sm" data-base-frame="border"
+                            onclick="setBaseFrame('border')">Border</button>
+                        <button class="shape-btn shape-btn-sm" data-base-frame="metallic"
+                            onclick="setBaseFrame('metallic')">Metallic</button>
+                        <button class="shape-btn shape-btn-sm" data-base-frame="glass"
+                            onclick="setBaseFrame('glass')">Glass</button>
+                        <button class="shape-btn shape-btn-sm" data-base-frame="emboss"
+                            onclick="setBaseFrame('emboss')">Emboss</button>
                     </div>
                 </div>
             </div>
 
-            <div class="seo-features-card seo-features-desktop">
+            <!-- Badge Tab Panel -->
+            <div class="tab-content" id="tab-panel-badge">
+                <div class="control-group">
+                    <label>Badge Position</label>
+                    <div class="shape-grid-2x2" style="margin-bottom: 0.35rem;">
+                        <button class="shape-btn shape-btn-sm" data-pos="top-left"
+                            onclick="setBadgePosition('top-left')">Top L</button>
+                        <button class="shape-btn shape-btn-sm" data-pos="top-right"
+                            onclick="setBadgePosition('top-right')">Top R</button>
+                        <button class="shape-btn shape-btn-sm" data-pos="bottom-left"
+                            onclick="setBadgePosition('bottom-left')">Bottom L</button>
+                        <button class="shape-btn shape-btn-sm active" data-pos="bottom-right"
+                            onclick="setBadgePosition('bottom-right')">Bottom R</button>
+                    </div>
+                    <button class="shape-btn shape-btn-sm" data-pos="none" onclick="setBadgePosition('none')"
+                        style="width: 100%;">None</button>
+                </div>
+
+                <div id="badge-settings-extra">
+                    <div class="control-group">
+                        <label for="badge-shape-select">Badge Shape</label>
+                        <select id="badge-shape-select" class="modern-select" onchange="setShape(this.value)">
+                            <option value="circle">Circle</option>
+                            <option value="roundrect">RoundRect</option>
+                            <option value="squircle">Squircle</option>
+                            <option value="square-hard">Square</option>
+                            <option value="hexagon">Hex V</option>
+                            <option value="hexagon-h">Hex H</option>
+                            <option value="diamond">Diamond</option>
+                            <option value="shield">Shield</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <span class="range-header"
+                            style="font-weight: 500; font-size: 0.8rem; margin-bottom: 0.35rem; color: var(--text-main);">Badge
+                            Color</span>
+                        <div class="color-presets" id="color-presets">
+                            <!-- Dynamic swatches -->
+                            <div class="custom-color-wrapper" id="custom-color-ui" title="Custom Color"
+                                style="--swatch-color: #3b82f6">
+                                <i data-lucide="plus" style="color:white"></i>
+                                <input type="color" id="custom-color" value="#3b82f6" oninput="setColor(this.value)"
+                                    onchange="triggerHaptic()" aria-label="Custom Badge Color">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="icon-input">Icon Picker (<a href="https://lucide.dev/icons" target="_blank"
+                                style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">Lucide</a>)</label>
+                        <div class="icon-picker-wrapper">
+                            <input type="text" id="icon-input" name="icon-search"
+                                placeholder="e.g. users, gauge, dumbbell, bell..." oninput="handleIconInput(this.value)"
+                                autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                                role="combobox" aria-autocomplete="list" aria-expanded="false"
+                                aria-controls="icon-dropdown">
+                            <div id="icon-dropdown" class="icon-dropdown" role="listbox" aria-label="Icon Suggestions">
+                            </div>
+                        </div>
+                        <div class="icon-suggestions">
+                            Ex:
+                            <span class="suggestion-tag" onclick="setIcon('dumbbell')">dumbbell</span>,
+                            <span class="suggestion-tag" onclick="setIcon('users')">user</span>,
+                            <span class="suggestion-tag" onclick="setIcon('gauge')">gauge</span>,
+                            <span class="suggestion-tag" onclick="setIcon('mail')">mail</span>,
+                            <span class="suggestion-tag" onclick="setIcon('settings')">settings</span>,
+                            <span class="suggestion-tag" onclick="setIcon('search')">search</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="range-header">
+                            <label for="badge-size-input">Badge Size</label>
+                            <span class="range-val"><span id="badge-size-val">40</span>%</span>
+                        </div>
+                        <input type="range" id="badge-size-input" min="20" max="60" value="40"
+                            oninput="setBadgeSize(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="range-header">
+                            <label for="badge-rot-input">Badge Rotation</label>
+                            <span class="range-val"><span id="badge-rot-val">0</span>°</span>
+                        </div>
+                        <input type="range" id="badge-rot-input" min="0" max="360" value="0"
+                            oninput="setBadgeRotation(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="range-header">
+                            <label for="inner-scale-input">Badge Icon Scale</label>
+                            <span class="range-val"><span id="inner-scale-val">70</span>%</span>
+                        </div>
+                        <input type="range" id="inner-scale-input" min="20" max="100" value="70"
+                            oninput="setInnerScale(this.value)" onpointerup="triggerHaptic()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Effects Tab Panel -->
+            <div class="tab-content" id="tab-panel-effects">
+                <div class="control-group">
+                    <label>Base Effects</label>
+                    <div class="shape-grid effects-grid">
+                        <button class="shape-btn shape-btn-sm" id="effect-noise"
+                            onclick="toggleBaseEffect('noise')">Noise</button>
+                        <button class="shape-btn shape-btn-sm" id="effect-glow"
+                            onclick="toggleBaseEffect('glow')">Glow</button>
+                        <button class="shape-btn shape-btn-sm" id="effect-vignette"
+                            onclick="toggleBaseEffect('vignette')">Vignette</button>
+                        <button class="shape-btn shape-btn-sm" id="effect-deep-fried"
+                            onclick="toggleBaseEffect('deep-fried')">Deep Fried</button>
+                        <button class="shape-btn shape-btn-sm" id="effect-crt"
+                            onclick="toggleBaseEffect('crt')">CRT</button>
+                        <button class="shape-btn shape-btn-sm" id="effect-mono"
+                            onclick="toggleBaseEffect('mono')">Mono</button>
+                    </div>
+                </div>
+
+                <div class="controls-footer"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="shadow-toggle" checked onchange="toggleShadows(this.checked)"
+                            style="width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;">
+                        <label for="shadow-toggle"
+                            style="margin: 0; cursor: pointer; text-transform: none; font-size: 0.75rem; color: var(--text-muted);">Show
+                            Shadows</label>
+                    </div>
+                    <button class="secondary" style="padding: 0.5rem 0.75rem; font-size: 0.75rem;"
+                        onclick="resetDefaults()">
+                        <i data-lucide="refresh-cw"></i> Reset All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Keep the SEO features block inside the sidebar or below panels -->
+            <div class="seo-features-card seo-features-desktop" style="margin-top: 1rem;">
                 <details class="seo-details">
                     <summary class="seo-summary">
                         <i data-lucide="info" class="seo-info-icon"></i>
@@ -332,7 +510,7 @@
                     <div class="seo-details-content">
                         <h2>Icon Generator</h2>
                         <p>
-                            <strong>Icon Studio</strong> is a professional browser-based design toolkit built to craft
+                            <strong>Icon Studio</strong> is a browser-based design toolkit built to craft
                             beautiful app icons, customize badges, and generate high-fidelity assets.
                         </p>
                         <h3>Key Design Features:</h3>
@@ -354,132 +532,6 @@
                     </div>
                 </details>
             </div>
-
-        </section>
-        <hr class="mobile-divider">
-
-        <!-- Badge Controls (Right Column) -->
-        <section class="controls-section badge-controls" aria-label="Badge Layer Customization">
-
-            <div class="control-group">
-                <label>Badge Position</label>
-                <div class="shape-grid-2x2" style="margin-bottom: 0.35rem;">
-                    <button class="shape-btn shape-btn-sm" data-pos="top-left"
-                        onclick="setBadgePosition('top-left')">Top L</button>
-                    <button class="shape-btn shape-btn-sm" data-pos="top-right"
-                        onclick="setBadgePosition('top-right')">Top R</button>
-                    <button class="shape-btn shape-btn-sm" data-pos="bottom-left"
-                        onclick="setBadgePosition('bottom-left')">Bottom L</button>
-                    <button class="shape-btn shape-btn-sm active" data-pos="bottom-right"
-                        onclick="setBadgePosition('bottom-right')">Bottom R</button>
-                </div>
-                <button class="shape-btn shape-btn-sm" data-pos="none" onclick="setBadgePosition('none')"
-                    style="width: 100%;">None</button>
-            </div>
-
-            <div id="badge-settings-extra">
-                <div class="control-group">
-                    <label>Badge Shape</label>
-                    <div class="shape-grid-4x2">
-                        <button class="shape-btn shape-btn-sm active" data-shape="circle"
-                            onclick="setShape('circle')">Circle</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="roundrect"
-                            onclick="setShape('roundrect')">RoundRect</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="squircle"
-                            onclick="setShape('squircle')">Squircle</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="square-hard"
-                            onclick="setShape('square-hard')">Square</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="hexagon" onclick="setShape('hexagon')">Hex
-                            V</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="hexagon-h"
-                            onclick="setShape('hexagon-h')">Hex H</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="diamond"
-                            onclick="setShape('diamond')">Diamond</button>
-                        <button class="shape-btn shape-btn-sm" data-shape="shield"
-                            onclick="setShape('shield')">Shield</button>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <span class="range-header"
-                        style="font-weight: 500; font-size: 0.8rem; margin-bottom: 0.35rem; color: var(--text-main);">Badge
-                        Color</span>
-                    <div class="color-presets" id="color-presets">
-                        <!-- Dynamic swatches -->
-                        <div class="custom-color-wrapper" id="custom-color-ui" title="Custom Color"
-                            style="--swatch-color: #3b82f6">
-                            <i data-lucide="plus" style="color:white"></i>
-                            <input type="color" id="custom-color" value="#3b82f6" oninput="setColor(this.value)"
-                                onchange="triggerHaptic()" aria-label="Custom Badge Color">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label for="icon-input">Icon Picker (<a href="https://lucide.dev/icons" target="_blank"
-                            style="color: inherit; text-decoration: underline; text-underline-offset: 2px;">Lucide</a>)</label>
-                    <div class="icon-picker-wrapper">
-                        <input type="text" id="icon-input" name="icon-search"
-                            placeholder="e.g. users, gauge, dumbbell, bell..." oninput="handleIconInput(this.value)"
-                            autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" role="combobox"
-                            aria-autocomplete="list" aria-expanded="false" aria-controls="icon-dropdown">
-                        <div id="icon-dropdown" class="icon-dropdown" role="listbox" aria-label="Icon Suggestions">
-                        </div>
-                    </div>
-                    <div class="icon-suggestions">
-                        Ex:
-                        <span class="suggestion-tag" onclick="setIcon('dumbbell')">dumbbell</span>,
-                        <span class="suggestion-tag" onclick="setIcon('users')">user</span>,
-                        <span class="suggestion-tag" onclick="setIcon('gauge')">gauge</span>,
-                        <span class="suggestion-tag" onclick="setIcon('mail')">mail</span>,
-                        <span class="suggestion-tag" onclick="setIcon('settings')">settings</span>,
-                        <span class="suggestion-tag" onclick="setIcon('search')">search</span>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <div class="range-header">
-                        <label for="badge-size-input">Badge Size</label>
-                        <span class="range-val"><span id="badge-size-val">40</span>%</span>
-                    </div>
-                    <input type="range" id="badge-size-input" min="20" max="60" value="40"
-                        oninput="setBadgeSize(this.value)" onpointerup="triggerHaptic()">
-                </div>
-
-                <div class="control-group">
-                    <div class="range-header">
-                        <label for="badge-rot-input">Badge Rotation</label>
-                        <span class="range-val"><span id="badge-rot-val">0</span>°</span>
-                    </div>
-                    <input type="range" id="badge-rot-input" min="0" max="360" value="0"
-                        oninput="setBadgeRotation(this.value)" onpointerup="triggerHaptic()">
-                </div>
-
-                <div class="control-group">
-                    <div class="range-header">
-                        <label for="inner-scale-input">Badge Icon Scale</label>
-                        <span class="range-val"><span id="inner-scale-val">70</span>%</span>
-                    </div>
-                    <input type="range" id="inner-scale-input" min="20" max="100" value="70"
-                        oninput="setInnerScale(this.value)" onpointerup="triggerHaptic()">
-                </div>
-            </div>
-
-            <div class="controls-footer"
-                style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <input type="checkbox" id="shadow-toggle" checked onchange="toggleShadows(this.checked)"
-                        style="width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer;">
-                    <label for="shadow-toggle"
-                        style="margin: 0; cursor: pointer; text-transform: none; font-size: 0.75rem; color: var(--text-muted);">Show
-                        Shadows</label>
-                </div>
-                <button class="secondary" style="padding: 0.5rem 0.75rem; font-size: 0.75rem;"
-                    onclick="resetDefaults()">
-                    <i data-lucide="refresh-cw"></i> Reset All
-                </button>
-            </div>
-
         </section>
 
         <!-- Mobile About Panel (Bottom) -->
@@ -518,160 +570,161 @@
             </div>
         </section>
 
-    <!-- iOS Add to Home Screen Prompt Container (Sits below the end of the main app UI panel) -->
-    <div id="ios-pwa-prompt" class="ios-prompt-container collapsed">
-        <div class="ios-prompt-card">
-            <!-- Close Button (visible when expanded) -->
-            <button class="ios-prompt-close" aria-label="Close" onclick="collapseIosPrompt(event)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-
-            <!-- Collapsed State: Icon, Title, Install Button -->
-            <div class="ios-prompt-collapsed-content">
-                <div class="ios-prompt-header-compact">
-                    <div class="ios-prompt-app-icon">
-                        <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180" height="180"
-                            loading="lazy">
-                    </div>
-                    <div class="ios-prompt-app-info">
-                        <h3>Icon Studio</h3>
-                        <p>iconstudio.ryanmarch.me</p>
-                    </div>
-                </div>
-                <button class="ios-prompt-install-btn" onclick="expandIosPrompt(event)">
+        <!-- iOS Add to Home Screen Prompt Container (Sits below the end of the main app UI panel) -->
+        <div id="ios-pwa-prompt" class="ios-prompt-container collapsed">
+            <div class="ios-prompt-card">
+                <!-- Close Button (visible when expanded) -->
+                <button class="ios-prompt-close" aria-label="Close" onclick="collapseIosPrompt(event)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round" class="btn-icon-svg">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
-                    Install
                 </button>
-            </div>
 
-            <!-- Expanded State: Step-by-Step Instructions -->
-            <div class="ios-prompt-expanded-content">
-                <div class="ios-prompt-header">
-                    <div class="ios-prompt-app-icon">
-                        <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180" height="180"
-                            loading="lazy">
-                    </div>
-                    <div class="ios-prompt-app-info">
-                        <h3>Icon Studio</h3>
-                        <p>iconstudio.ryanmarch.me</p>
-                    </div>
-                </div>
-                <div class="ios-prompt-body">
-                    <p>Install this web app on your device to design in full screen, use high-fidelity exports, and work
-                        offline.</p>
-                    <div class="ios-prompt-steps">
-                        <div class="ios-prompt-step">
-                            <div class="ios-prompt-step-num">1</div>
-                            <div class="ios-prompt-step-text">
-                                Tap the share button <span class="ios-icon-span"><svg viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                                        stroke-linejoin="round" class="ios-action-icon">
-                                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                                        <polyline points="16 6 12 2 8 6"></polyline>
-                                        <line x1="12" y1="2" x2="12" y2="15"></line>
-                                    </svg></span> in Safari's toolbar.
-                            </div>
+                <!-- Collapsed State: Icon, Title, Install Button -->
+                <div class="ios-prompt-collapsed-content">
+                    <div class="ios-prompt-header-compact">
+                        <div class="ios-prompt-app-icon">
+                            <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180"
+                                height="180" loading="lazy">
                         </div>
-                        <div class="ios-prompt-step">
-                            <div class="ios-prompt-step-num">2</div>
-                            <div class="ios-prompt-step-text">
-                                Scroll down and select <span class="ios-action-text"><span
-                                        class="ios-icon-span-plus"><svg viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        <div class="ios-prompt-app-info">
+                            <h3>Icon Studio</h3>
+                            <p>iconstudio.ryanmarch.me</p>
+                        </div>
+                    </div>
+                    <button class="ios-prompt-install-btn" onclick="expandIosPrompt(event)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" class="btn-icon-svg">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Install
+                    </button>
+                </div>
+
+                <!-- Expanded State: Step-by-Step Instructions -->
+                <div class="ios-prompt-expanded-content">
+                    <div class="ios-prompt-header">
+                        <div class="ios-prompt-app-icon">
+                            <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180"
+                                height="180" loading="lazy">
+                        </div>
+                        <div class="ios-prompt-app-info">
+                            <h3>Icon Studio</h3>
+                            <p>iconstudio.ryanmarch.me</p>
+                        </div>
+                    </div>
+                    <div class="ios-prompt-body">
+                        <p>Install this web app on your device to design in full screen, use high-fidelity exports, and
+                            work
+                            offline.</p>
+                        <div class="ios-prompt-steps">
+                            <div class="ios-prompt-step">
+                                <div class="ios-prompt-step-num">1</div>
+                                <div class="ios-prompt-step-text">
+                                    Tap the share button <span class="ios-icon-span"><svg viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                                             stroke-linejoin="round" class="ios-action-icon">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                                        </svg></span> Add to Home Screen</span>.
+                                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                            <polyline points="16 6 12 2 8 6"></polyline>
+                                            <line x1="12" y1="2" x2="12" y2="15"></line>
+                                        </svg></span> in Safari's toolbar.
+                                </div>
+                            </div>
+                            <div class="ios-prompt-step">
+                                <div class="ios-prompt-step-num">2</div>
+                                <div class="ios-prompt-step-text">
+                                    Scroll down and select <span class="ios-action-text"><span
+                                            class="ios-icon-span-plus"><svg viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                                stroke-linejoin="round" class="ios-action-icon">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                                            </svg></span> Add to Home Screen</span>.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Desktop PWA Install Prompt Container (Sits below the iOS prompt, positioned dynamically) -->
-    <div id="desktop-pwa-prompt" class="desktop-prompt-container collapsed">
-        <div class="desktop-prompt-card">
-            <!-- Close Button (visible when expanded or collapses/dismisses when collapsed) -->
-            <button class="desktop-prompt-close" aria-label="Close" onclick="collapseDesktopPrompt(event)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-
-            <!-- Collapsed State: Icon, Title, Install Button -->
-            <div class="desktop-prompt-collapsed-content">
-                <div class="desktop-prompt-header-compact">
-                    <div class="desktop-prompt-app-icon">
-                        <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180" height="180"
-                            loading="lazy">
-                    </div>
-                    <div class="desktop-prompt-app-info">
-                        <h3>Icon Studio</h3>
-                        <p id="desktop-prompt-subtitle">Install Desktop App</p>
-                    </div>
-                </div>
-                <button id="desktop-prompt-action-btn" class="desktop-prompt-install-btn"
-                    onclick="handleDesktopInstallAction(event)">
+        <!-- Desktop PWA Install Prompt Container (Sits below the iOS prompt, positioned dynamically) -->
+        <div id="desktop-pwa-prompt" class="desktop-prompt-container collapsed">
+            <div class="desktop-prompt-card">
+                <!-- Close Button (visible when expanded or collapses/dismisses when collapsed) -->
+                <button class="desktop-prompt-close" aria-label="Close" onclick="collapseDesktopPrompt(event)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round" class="btn-icon-svg">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
-                    Install
                 </button>
-            </div>
 
-            <!-- Expanded State: Step-by-Step Instructions -->
-            <div class="desktop-prompt-expanded-content">
-                <div class="desktop-prompt-header">
-                    <div class="desktop-prompt-app-icon">
-                        <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180" height="180"
-                            loading="lazy">
-                    </div>
-                    <div class="desktop-prompt-app-info">
-                        <h3>Icon Studio</h3>
-                        <p>iconstudio.ryanmarch.me</p>
-                    </div>
-                </div>
-                <div class="desktop-prompt-body">
-                    <p id="desktop-prompt-instructions-text">Install this web app on your device to design in full
-                        screen, use high-fidelity exports, and work offline.</p>
-                    <div class="desktop-prompt-steps" id="desktop-prompt-steps-container">
-                        <div class="desktop-prompt-step">
-                            <div class="desktop-prompt-step-num">1</div>
-                            <div class="desktop-prompt-step-text">
-                                Open the <strong>File</strong> menu in Safari's top menu bar.
-                            </div>
+                <!-- Collapsed State: Icon, Title, Install Button -->
+                <div class="desktop-prompt-collapsed-content">
+                    <div class="desktop-prompt-header-compact">
+                        <div class="desktop-prompt-app-icon">
+                            <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180"
+                                height="180" loading="lazy">
                         </div>
-                        <div class="desktop-prompt-step">
-                            <div class="desktop-prompt-step-num">2</div>
-                            <div class="desktop-prompt-step-text">
-                                Select <span class="ios-action-text">Add to Dock...</span>.
+                        <div class="desktop-prompt-app-info">
+                            <h3>Icon Studio</h3>
+                            <p id="desktop-prompt-subtitle">Install Desktop App</p>
+                        </div>
+                    </div>
+                    <button id="desktop-prompt-action-btn" class="desktop-prompt-install-btn"
+                        onclick="handleDesktopInstallAction(event)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" class="btn-icon-svg">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Install
+                    </button>
+                </div>
+
+                <!-- Expanded State: Step-by-Step Instructions -->
+                <div class="desktop-prompt-expanded-content">
+                    <div class="desktop-prompt-header">
+                        <div class="desktop-prompt-app-icon">
+                            <img src="/assets/favicon/apple-touch-icon.png" alt="Icon Studio Icon" width="180"
+                                height="180" loading="lazy">
+                        </div>
+                        <div class="desktop-prompt-app-info">
+                            <h3>Icon Studio</h3>
+                            <p>iconstudio.ryanmarch.me</p>
+                        </div>
+                    </div>
+                    <div class="desktop-prompt-body">
+                        <p id="desktop-prompt-instructions-text">Install this web app on your device to design in full
+                            screen, use high-fidelity exports, and work offline.</p>
+                        <div class="desktop-prompt-steps" id="desktop-prompt-steps-container">
+                            <div class="desktop-prompt-step">
+                                <div class="desktop-prompt-step-num">1</div>
+                                <div class="desktop-prompt-step-text">
+                                    Open the <strong>File</strong> menu in Safari's top menu bar.
+                                </div>
+                            </div>
+                            <div class="desktop-prompt-step">
+                                <div class="desktop-prompt-step-num">2</div>
+                                <div class="desktop-prompt-step-text">
+                                    Select <span class="ios-action-text">Add to Dock...</span>.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Mobile Footer at the very bottom -->
-    <iconstudio-footer class="mobile-only-footer"></iconstudio-footer>
+        <!-- Mobile Footer at the very bottom -->
+        <iconstudio-footer class="mobile-only-footer"></iconstudio-footer>
     </main>
 
 

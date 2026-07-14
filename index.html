@@ -91,9 +91,10 @@
                             <div class="icon-viewport">
                                 <div class="showcase-icon-card" id="showcaseCard">
                                     <div class="showcase-icon-backdrop" id="showcaseBackdrop">
+                                        <div class="showcase-icon-frame-overlay" id="showcaseFrameOverlay"></div>
                                         <div class="showcase-icon-gloss" id="showcaseGloss"></div>
                                         <div class="showcase-icon-center" id="showcaseCenter">
-                                            <!-- label text injected dynamically -->
+                                            <!-- SVG/HTML injected dynamically -->
                                         </div>
                                     </div>
                                     <div class="showcase-badge" id="showcaseBadge">
@@ -112,6 +113,36 @@
             </div>
         </section>
 
+        <!-- Sandbox Preview Section -->
+        <section class="sandbox-section">
+            <div class="sandbox-container">
+                <div class="sandbox-header">
+                    <h2 class="section-title">Try a Random Design</h2>
+                    <p class="section-desc">Generate beautiful icon styles with a single click and launch them instantly
+                        in the app.</p>
+                </div>
+                <div class="sandbox-playground">
+                    <div class="sandbox-preview-wrapper">
+                        <div class="sandbox-icon-card" id="sandboxCard">
+                            <div class="sandbox-icon-backdrop" id="sandboxBackdrop">
+                                <div class="sandbox-icon-gloss" id="sandboxGloss"></div>
+                                <div class="sandbox-icon-center" id="sandboxCenter"></div>
+                            </div>
+                            <div class="sandbox-badge" id="sandboxBadge">
+                                <div class="sandbox-badge-shape" id="sandboxBadgeShape"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sandbox-controls">
+                        <button class="btn btn-secondary" id="btnRollRandom">
+                            <span>🎲 Surprise Me</span>
+                        </button>
+                        <a href="app/" class="btn btn-primary" id="btnCustomizeRandom">Customize this Icon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- How It Works Section -->
         <section class="how-it-works-section">
             <h2 class="section-title">Build Your Design</h2>
@@ -119,10 +150,33 @@
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-image">
-                        <picture>
-                            <source srcset="assets/img/step1.avif" type="image/avif">
-                            <img src="assets/img/step1.png" alt="Customize Layout" loading="lazy">
-                        </picture>
+                        <div class="step-image-widget widget-customize" id="widgetCustomize">
+                            <div class="widget-ui-panel">
+                                <div class="ui-option-row">
+                                    <span class="ui-label">Shape</span>
+                                    <div class="ui-button-group">
+                                        <button class="ui-btn active" id="btn-shape-squircle">Squircle</button>
+                                        <button class="ui-btn" id="btn-shape-circle">Circle</button>
+                                        <button class="ui-btn" id="btn-shape-hexagon">Hexagon</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-preview-area">
+                                <div class="widget-preview-icon squircle" id="customizePreviewIcon">
+                                    <div class="widget-icon-bg"></div>
+                                    <div class="widget-icon-gloss"></div>
+                                    <div class="widget-icon-content">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                            <circle cx="9" cy="9" r="2" />
+                                            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="virtual-cursor" id="customizeCursor" style="opacity: 0;"></div>
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3>Customize Layout</h3>
@@ -132,10 +186,37 @@
 
                 <div class="step-card">
                     <div class="step-image">
-                        <picture>
-                            <source srcset="assets/img/step2.avif" type="image/avif">
-                            <img src="assets/img/step2.png" alt="Add Badges & Effects" loading="lazy">
-                        </picture>
+                        <div class="step-image-widget widget-badges" id="widgetBadges">
+                            <div class="widget-preview-area">
+                                <div class="widget-preview-icon squircle">
+                                    <div class="widget-icon-bg"></div>
+                                    <div class="widget-icon-gloss"></div>
+                                    <div class="widget-icon-content">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                            <path d="m9 12 2 2 4-4" />
+                                        </svg>
+                                    </div>
+                                    <div class="widget-badge pos-top-right" id="widgetBadgeEl">
+                                        <div class="widget-badge-shape">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-ui-overlay">
+                                <div class="corner-indicator top-left" id="ind-top-left"></div>
+                                <div class="corner-indicator top-right active" id="ind-top-right"></div>
+                                <div class="corner-indicator bottom-left" id="ind-bottom-left"></div>
+                                <div class="corner-indicator bottom-right" id="ind-bottom-right"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3>Add Badges & Effects</h3>
@@ -146,10 +227,48 @@
 
                 <div class="step-card">
                     <div class="step-image">
-                        <picture>
-                            <source srcset="assets/img/step3.avif" type="image/avif">
-                            <img src="assets/img/step3.png" alt="Export & Share" loading="lazy">
-                        </picture>
+                        <div class="step-image-widget widget-export" id="widgetExport">
+                            <div class="widget-export-flow">
+                                <button class="widget-download-btn" id="widgetExportBtn">
+                                    <span class="btn-text">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="7 10 12 15 17 10" />
+                                            <line x1="12" y1="15" x2="12" y2="3" />
+                                        </svg>
+                                        Export PNG
+                                    </span>
+                                    <span class="btn-spinner"></span>
+                                    <span class="btn-success">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                        Exported!
+                                    </span>
+                                </button>
+                                <div class="export-preview-grid" id="widgetExportGrid">
+                                    <div class="preview-item size-lg">
+                                        <div class="preview-icon-wrapper squircle"></div>
+                                        <span class="preview-label">iOS</span>
+                                    </div>
+                                    <div class="preview-item size-md">
+                                        <div class="preview-icon-wrapper circle"></div>
+                                        <span class="preview-label">Android</span>
+                                    </div>
+                                    <div class="preview-item size-sm">
+                                        <div class="preview-icon-wrapper roundrect"></div>
+                                        <span class="preview-label">Favicon</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="virtual-cursor" id="exportCursor" style="opacity: 0;"></div>
+                        </div>
                     </div>
                     <div class="step-content">
                         <h3>Export & Share</h3>
@@ -166,51 +285,63 @@
             <p class="section-desc">Packed with tools to make icon creation simple and highly interactive.</p>
             <div class="features-grid">
                 <article class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div>
+                        <h3>Skeuomorphic Overlays</h3>
                     </div>
-                    <h3>Skeuomorphic Overlays</h3>
                     <p>Apply multi-layered glass effects, frames, and shadows for a physical, tactile feel.</p>
                 </article>
 
                 <article class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                            <circle cx="8.5" cy="8.5" r="1.5" />
-                            <polyline points="21 15 16 10 5 21" />
-                        </svg>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                        </div>
+                        <h3>Rich Backgrounds</h3>
                     </div>
-                    <h3>Rich Backgrounds</h3>
                     <p>Choose solid colors, gradients, or upload your own images to create the perfect
                         backgrounds.</p>
                 </article>
 
                 <article class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="7" width="14" height="14" rx="3" />
-                            <circle cx="17" cy="7" r="4" fill="currentColor" />
-                        </svg>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="7" width="14" height="14" rx="3" />
+                                <circle cx="17" cy="7" r="4" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>Dynamic Badges</h3>
                     </div>
-                    <h3>Dynamic Badges</h3>
                     <p>Place notification badges anywhere on the icon perimeter, control border widths,
                         colors, and positioning.</p>
                 </article>
 
                 <article class="feature-card">
-                    <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
-                        </svg>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
+                            </svg>
+                        </div>
+                        <h3>Instant Sharing</h3>
                     </div>
-                    <h3>Instant Sharing</h3>
                     <p>Create configurations and share a link to reload the exact design instantly on any device.</p>
                 </article>
             </div>
@@ -257,107 +388,233 @@
                     <p>Generate matching shortcut badges, favicons, and splash-screen-ready icons.</p>
                 </article>
             </div>
-        </section>
+            <!-- Real-World Previews Grid -->
+            <section class="real-world-section">
+                <h2 class="section-title">Designed for Your Real-World Workflow</h2>
+                <p class="section-desc">See how pre-badged icons fit seamlessly into your favorite applications and
+                    devices.</p>
+                <div class="real-world-grid">
+                    <!-- SaaS In-App Sidebar -->
+                    <div class="real-world-card">
+                        <div class="real-world-mockup">
+                            <div class="sidebar-mockup-frame">
+                                <div class="sidebar-mockup-aside">
+                                    <div class="sidebar-mockup-item">
+                                        <div class="sidebar-mockup-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="7" height="9" rx="1" />
+                                                <rect x="14" y="3" width="7" height="5" rx="1" />
+                                                <rect x="14" y="12" width="7" height="9" rx="1" />
+                                                <rect x="3" y="16" width="7" height="5" rx="1" />
+                                            </svg>
+                                        </div>
+                                        <div class="sidebar-mockup-text"></div>
+                                    </div>
+                                    <div class="sidebar-mockup-item active">
+                                        <div class="sidebar-mockup-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path
+                                                    d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
+                                            </svg>
+                                            <span class="sidebar-badge-dot"
+                                                style="position: absolute; width: 6px; height: 6px; background: #10b981; border-radius: 50%; top: 1px; right: -26px; border: 1px solid #0f172a;"></span>
+                                        </div>
+                                        <div class="sidebar-mockup-text"
+                                            style="background: var(--accent); opacity: 0.6;"></div>
+                                    </div>
+                                    <div class="sidebar-mockup-item">
+                                        <div class="sidebar-mockup-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path
+                                                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                                <path d="m9 12 2 2 4-4" />
+                                            </svg>
+                                        </div>
+                                        <div class="sidebar-mockup-text"></div>
+                                    </div>
+                                </div>
+                                <div class="sidebar-mockup-content">
+                                    <div class="sidebar-mockup-title"></div>
+                                    <div class="sidebar-mockup-row" style="width: 85%;"></div>
+                                    <div class="sidebar-mockup-row" style="width: 70%;"></div>
+                                    <div class="sidebar-mockup-row" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="real-world-info">
+                            <h3>SaaS In-App Sidebar</h3>
+                            <p>Highlight active files, new notifications, or pending user reviews with subtle badges in
+                                navigation sidebars.</p>
+                        </div>
+                    </div>
 
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-desc">Got questions about Icon Studio? We've got answers.</p>
-            <div class="faq-accordion">
-                <div class="faq-item">
-                    <button class="faq-trigger" aria-expanded="false">
-                        <span>Is Icon Studio free to use?</span>
-                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="faq-content">
-                        <div class="faq-content-inner">
-                            <p>Yes, Icon Studio is free to use. You can design, customize, and export as many
-                                icons as you need without creating an account or subscribing.</p>
+                    <!-- Stream Deck / Macro Key -->
+                    <div class="real-world-card">
+                        <div class="real-world-mockup">
+                            <div class="streamdeck-key">
+                                <div class="streamdeck-screen">
+                                    <div class="streamdeck-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            style="width: 70%; height: 70%; opacity: 0.95;">
+                                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+                                            <path d="M19 10v1a7 7 0 0 1-14 0v-1" />
+                                            <line x1="12" y1="19" x2="12" y2="22" />
+                                        </svg>
+                                        <div class="streamdeck-badge">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                style="width: 100%; height: 100%;">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="real-world-info">
+                            <h3>Stream Deck / Macro Key</h3>
+                            <p>Map high-contrast indicators directly onto macro bezel displays to show mute status,
+                                warning alerts, or hotkey actions.</p>
                         </div>
                     </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-trigger" aria-expanded="false">
-                        <span>Can I use the exported icons in commercial projects?</span>
-                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="faq-content">
-                        <div class="faq-content-inner">
-                            <p>Absolutely! All assets you generate and export from Icon Studio can be used for both
-                                personal and commercial distribution without restriction or attribution requirements.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-trigger" aria-expanded="false">
-                        <span>What formats and resolutions are supported?</span>
-                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="faq-content">
-                        <div class="faq-content-inner">
-                            <p>Icon Studio supports exporting to high-resolution PNG format, perfect for app packaging.
-                                You can also export SVG paths for use in other design tools, or share your configuration
-                                instantly using deep links.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-trigger" aria-expanded="false">
-                        <span>How does the live sharing feature work?</span>
-                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="faq-content">
-                        <div class="faq-content-inner">
-                            <p>When you click share, the app encodes your entire customized setup into a URL. Send this
-                                URL to anyone, and they'll load your exact setup, styles, and configurations instantly
-                                in their browser.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-card">
-                <h2>Ready to Build Your Perfect Icon?</h2>
-                <p>Launch the editor right in your browser and start designing immediately. No installation or account
-                    required.</p>
-                <a href="app/" class="btn btn-primary btn-large">Launch Icon Studio</a>
-            </div>
-        </section>
+                    <!-- Custom Desktop Folder -->
+                    <div class="real-world-card">
+                        <div class="real-world-mockup">
+                            <div class="desktop-mockup-wallpaper">
+                                <div class="desktop-folder-wrapper">
+                                    <div class="desktop-folder-icon"
+                                        style="background: linear-gradient(135deg, #38bdf8, #0284c7); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); width: 64px; height: 64px; position: relative;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            style="width: 50%; height: 50%;">
+                                            <path
+                                                d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
+                                        </svg>
+                                        <div
+                                            style="position: absolute; width: 18px; height: 18px; background: #10b981; border-radius: 50%; bottom: -4px; right: -4px; border: 2px solid #0f172a; display: flex; align-items: center; justify-content: center;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                style="width: 70%; height: 70%;">
+                                                <polyline points="20 6 9 17 4 12" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="desktop-folder-label">Projects</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="real-world-info">
+                            <h3>Custom Desktop Folder</h3>
+                            <p>Give your macOS or Windows system a unique look by applying customizable badges to
+                                folders on your desktop wallpaper.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-desc">Got questions about Icon Studio? We've got answers.</p>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Is Icon Studio free to use?</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Yes, Icon Studio is free to use. You can design, customize, and export as many
+                                    icons as you need without creating an account or subscribing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>Can I use the exported icons in commercial projects?</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Absolutely! All assets you generate and export from Icon Studio can be used for both
+                                    personal and commercial distribution without restriction or attribution
+                                    requirements.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>What formats and resolutions are supported?</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>Icon Studio supports exporting to high-resolution PNG format, perfect for app
+                                    packaging.
+                                    You can also export SVG paths for use in other design tools, or share your
+                                    configuration
+                                    instantly using deep links.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span>How does the live sharing feature work?</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <p>When you click share, the app encodes your entire customized setup into a URL. Send
+                                    this
+                                    URL to anyone, and they'll load your exact setup, styles, and configurations
+                                    instantly
+                                    in their browser.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-card">
+                    <h2>Ready to Build Your Perfect Icon?</h2>
+                    <p>Launch the editor right in your browser and start designing immediately. No installation or
+                        account
+                        required.</p>
+                    <a href="app/" class="btn btn-primary btn-large">Launch Icon Studio</a>
+                </div>
+            </section>
     </main>
 
     <script>
         // Hero Interactive Showcase Logic
         document.addEventListener('DOMContentLoaded', () => {
-            // Each variant mirrors the app's real output:
-            // - base: gradient bg + shape + center label text
-            // - badge: colored shape (circle/squircle/hexagon/diamond/shield) + Lucide icon inside
-            // - badgePos: which corner (top-left, top-right, bottom-left, bottom-right)
             const variants = [
                 {
                     title: "Simple Users",
                     gradient: "linear-gradient(135deg, #3b82f6, #1D0945)",
-                    baseShape: "squircle",   // border-radius on backdrop
-                    centerLabel: "YOUR TEXT",
-                    centerStyle: "text",
+                    baseShape: "squircle",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: false,
                     shadow: "0 20px 40px -10px rgba(29,9,69,0.7)",
-                    // Badge
                     badgeColor: "#3b82f6",
                     badgeShape: "circle",
                     badgeIcon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
@@ -367,8 +624,8 @@
                     title: "Candy Star",
                     gradient: "linear-gradient(135deg, #9333ea, #1D0945)",
                     baseShape: "squircle",
-                    centerLabel: "YOUR ICON",
-                    centerStyle: "icon-placeholder",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: true,
                     shadow: "0 20px 40px -10px rgba(147,51,234,0.6)",
                     badgeColor: "#ef4444",
@@ -380,8 +637,8 @@
                     title: "Sunset Bell",
                     gradient: "linear-gradient(135deg, #f97316, #e11d48)",
                     baseShape: "roundrect",
-                    centerLabel: "YOUR TEXT",
-                    centerStyle: "text",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: true,
                     shadow: "0 20px 40px -10px rgba(249,115,22,0.6)",
                     badgeColor: "#f59e0b",
@@ -393,8 +650,8 @@
                     title: "Mint Heart",
                     gradient: "linear-gradient(135deg, #10b981, #06b6d4)",
                     baseShape: "circle",
-                    centerLabel: "YOUR ICON",
-                    centerStyle: "icon-placeholder",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: true,
                     shadow: "0 20px 40px -10px rgba(16,185,129,0.6)",
                     badgeColor: "#ec4899",
@@ -404,23 +661,25 @@
                 },
                 {
                     title: "Royal Crown",
-                    gradient: "linear-gradient(135deg, #1e1b4b, #311042)",
+                    // vibrant background gradient suitable for semi-transparent overlay
+                    gradient: "linear-gradient(135deg, rgba(99, 102, 241, 0.45), rgba(236, 72, 153, 0.45))",
                     baseShape: "squircle",
-                    centerLabel: "YOUR IMAGE",
-                    centerStyle: "image-placeholder",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));"><path d="M2 4 5 12h14l3-8-7 4-3-6-3 6-7-4z"/><path d="M3 20h18a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1z"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: true,
-                    shadow: "0 20px 40px -10px rgba(245,158,11,0.4)",
-                    badgeColor: "#f59e0b",
-                    badgeShape: "squircle",
-                    badgeIcon: `<path d="M2 4 5 12h14l3-8-7 4-3-6-3 6-7-4z"/><path d="M5 20h14a2 2 0 0 0 2-2V14a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2z"/>`,
-                    badgePos: "bottom-right"
+                    frame: "glass",
+                    shadow: "0 20px 40px -10px rgba(168,85,247,0.5)",
+                    badgeColor: "#ec4899",
+                    badgeShape: "circle",
+                    badgeIcon: `<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/>`,
+                    badgePos: "top-right"
                 },
                 {
                     title: "Blue Rocket",
                     gradient: "linear-gradient(135deg, #0284c7, #1D0945)",
                     baseShape: "squircle",
-                    centerLabel: "YOUR TEXT",
-                    centerStyle: "text",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: true,
                     shadow: "0 20px 40px -10px rgba(2,132,199,0.6)",
                     badgeColor: "#06b6d4",
@@ -429,11 +688,11 @@
                     badgePos: "top-right"
                 },
                 {
-                    title: "Pink Pallete",
+                    title: "Pink Palette",
                     gradient: "linear-gradient(135deg, #a855f7, #ec4899)",
                     baseShape: "squircle",
-                    centerLabel: "YOUR ICON",
-                    centerStyle: "icon-placeholder",
+                    centerHTML: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 50%; height: 50%; color: #fff;"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+                    centerStyle: "icon-rendered",
                     gloss: false,
                     shadow: "0 20px 40px -10px rgba(168,85,247,0.6)",
                     badgeColor: "#10b981",
@@ -449,6 +708,7 @@
             const showcaseCard = document.getElementById('showcaseCard');
             const showcaseBackdrop = document.getElementById('showcaseBackdrop');
             const showcaseGloss = document.getElementById('showcaseGloss');
+            const showcaseFrameOverlay = document.getElementById('showcaseFrameOverlay');
             const showcaseCenter = document.getElementById('showcaseCenter');
             const showcaseBadge = document.getElementById('showcaseBadge');
             const showcaseBadgeShape = document.getElementById('showcaseBadgeShape');
@@ -474,7 +734,7 @@
                 });
             }
 
-            // Shape → CSS class/clip-path mapping (matching app's badge-shape CSS)
+            // Shape → CSS class/clip-path mapping
             const shapeStyles = {
                 'circle': { borderRadius: '50%', clipPath: '' },
                 'squircle': { borderRadius: '22%', clipPath: '' },
@@ -519,7 +779,7 @@
                     applyVariant(variants[index]);
                     updateIndicators();
 
-                    // Set entering state (no transition so it snaps to start position)
+                    // Set entering state (no transition)
                     showcaseCard.classList.remove('is-exiting');
                     showcaseCard.classList.add('is-entering');
 
@@ -544,7 +804,20 @@
                 showcaseBackdrop.style.boxShadow = v.shadow;
                 showcaseGloss.style.opacity = v.gloss ? '1' : '0';
                 showcaseCenter.className = 'showcase-icon-center ' + v.centerStyle;
-                showcaseCenter.textContent = v.centerLabel;
+                showcaseCenter.innerHTML = v.centerHTML || '';
+
+                if (showcaseFrameOverlay) {
+                    showcaseFrameOverlay.className = 'showcase-icon-frame-overlay' + (v.frame ? ' ' + v.frame : '');
+                }
+
+                if (v.frame === 'glass') {
+                    showcaseBackdrop.style.backdropFilter = 'blur(12px) brightness(1.5)';
+                    showcaseBackdrop.style.webkitBackdropFilter = 'blur(12px) brightness(1.5)';
+                } else {
+                    showcaseBackdrop.style.backdropFilter = '';
+                    showcaseBackdrop.style.webkitBackdropFilter = '';
+                }
+
                 const ss = shapeStyles[v.badgeShape] || shapeStyles['circle'];
                 showcaseBadgeShape.style.background = v.badgeColor;
                 showcaseBadgeShape.style.borderRadius = ss.borderRadius;
@@ -569,6 +842,149 @@
             startInterval();
 
 
+            // self-playing feature micro-animations:
+            // 1. Customize Layout Animation Loop
+            const customizeWidget = document.getElementById('widgetCustomize');
+            const customizeCursor = document.getElementById('customizeCursor');
+            const customizeIcon = document.getElementById('customizePreviewIcon');
+            const shapeBtns = {
+                squircle: document.getElementById('btn-shape-squircle'),
+                circle: document.getElementById('btn-shape-circle'),
+                hexagon: document.getElementById('btn-shape-hexagon')
+            };
+
+            function animateCustomize() {
+                if (!customizeWidget || !customizeCursor) return;
+
+                const parentRect = customizeWidget.getBoundingClientRect();
+                if (parentRect.width === 0) {
+                    // Not visible, try again later
+                    setTimeout(animateCustomize, 1000);
+                    return;
+                }
+
+                const moveAndClick = (targetKey, nextKey, delay) => {
+                    setTimeout(() => {
+                        const targetBtn = shapeBtns[targetKey];
+                        if (!targetBtn) return;
+
+                        const rect = targetBtn.getBoundingClientRect();
+                        const x = rect.left - parentRect.left + rect.width / 2;
+                        const y = rect.top - parentRect.top + rect.height / 2;
+
+                        customizeCursor.style.opacity = '1';
+                        customizeCursor.style.transform = `translate(${x}px, ${y}px)`;
+
+                        // Simulate click after move completes
+                        setTimeout(() => {
+                            targetBtn.style.transform = 'scale(0.9)';
+                            setTimeout(() => { targetBtn.style.transform = ''; }, 100);
+
+                            // Toggle active class
+                            Object.keys(shapeBtns).forEach(k => {
+                                shapeBtns[k].classList.toggle('active', k === targetKey);
+                            });
+
+                            // Morph shape
+                            customizeIcon.className = `widget-preview-icon ${targetKey}`;
+                        }, 500);
+                    }, delay);
+                };
+
+                // Sequence: squircle -> circle -> hexagon -> squircle
+                moveAndClick('circle', 'hexagon', 1000);
+                moveAndClick('hexagon', 'squircle', 3500);
+                moveAndClick('squircle', 'circle', 6000);
+
+                setTimeout(animateCustomize, 8500);
+            }
+            animateCustomize();
+
+
+            // 2. Add Badges Animation Loop
+            const badgeEl = document.getElementById('widgetBadgeEl');
+            const badgeCorners = ['top-right', 'bottom-right', 'bottom-left', 'top-left'];
+            let badgeCornerIndex = 0;
+
+            function animateBadges() {
+                if (!badgeEl) return;
+                badgeCornerIndex = (badgeCornerIndex + 1) % badgeCorners.length;
+                const nextCorner = badgeCorners[badgeCornerIndex];
+
+                // Remove current corner positions
+                badgeEl.className = `widget-badge pos-${nextCorner}`;
+
+                // Pop animation effect
+                badgeEl.style.transform = 'scale(0.5)';
+                setTimeout(() => {
+                    badgeEl.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        badgeEl.style.transform = 'scale(1)';
+                    }, 150);
+                }, 150);
+
+                // Update corner indicators active class
+                badgeCorners.forEach(c => {
+                    const ind = document.getElementById(`ind-${c}`);
+                    if (ind) ind.classList.toggle('active', c === nextCorner);
+                });
+
+                setTimeout(animateBadges, 2200);
+            }
+            // Start badge loop
+            setTimeout(animateBadges, 2200);
+
+
+            // 3. Export & Share Animation Loop
+            const exportWidget = document.getElementById('widgetExport');
+            const exportCursor = document.getElementById('exportCursor');
+            const exportBtn = document.getElementById('widgetExportBtn');
+            const exportGrid = document.getElementById('widgetExportGrid');
+
+            function animateExport() {
+                if (!exportWidget || !exportCursor || !exportBtn || !exportGrid) return;
+
+                const parentRect = exportWidget.getBoundingClientRect();
+                if (parentRect.width === 0) {
+                    setTimeout(animateExport, 1000);
+                    return;
+                }
+
+                // Reset state
+                exportBtn.className = 'widget-download-btn';
+                exportGrid.classList.remove('visible');
+                exportCursor.style.opacity = '0';
+                exportCursor.style.transform = `translate(${parentRect.width / 2}px, ${parentRect.height - 20}px)`;
+
+                // 1. Show cursor and move to button
+                setTimeout(() => {
+                    const rect = exportBtn.getBoundingClientRect();
+                    const x = rect.left - parentRect.left + rect.width / 2;
+                    const y = rect.top - parentRect.top + rect.height / 2;
+
+                    exportCursor.style.opacity = '1';
+                    exportCursor.style.transform = `translate(${x}px, ${y}px)`;
+                }, 500);
+
+                // 2. Click button -> loading state
+                setTimeout(() => {
+                    exportBtn.classList.add('loading');
+                    exportCursor.style.opacity = '0';
+                }, 1300);
+
+                // 3. Complete loading -> success state + reveal previews
+                setTimeout(() => {
+                    exportBtn.classList.remove('loading');
+                    exportBtn.classList.add('success');
+                    exportGrid.classList.add('visible');
+                }, 2800);
+
+                // 4. Repeat loop
+                setTimeout(animateExport, 6500);
+            }
+            animateExport();
+
+
             // FAQ Accordion Logic
             document.querySelectorAll('.faq-trigger').forEach(trigger => {
                 trigger.addEventListener('click', () => {
@@ -588,6 +1004,104 @@
                     item.classList.toggle('open', !isExpanded);
                 });
             });
+
+            // Sandbox Randomizer Logic
+            const sandboxCard = document.getElementById('sandboxCard');
+            const sandboxBackdrop = document.getElementById('sandboxBackdrop');
+            const sandboxCenter = document.getElementById('sandboxCenter');
+            const sandboxBadge = document.getElementById('sandboxBadge');
+            const sandboxBadgeShape = document.getElementById('sandboxBadgeShape');
+            const btnRollRandom = document.getElementById('btnRollRandom');
+            const btnCustomizeRandom = document.getElementById('btnCustomizeRandom');
+
+            const brandColors = [
+                '#3b82f6', // Blue
+                '#9333ea', // Purple
+                '#ef4444', // Red
+                '#f97316', // Orange
+                '#10b981', // Emerald
+                '#06b6d4', // Cyan
+                '#f59e0b', // Amber
+            ];
+
+            const badgeShapes = ['circle', 'squircle', 'roundrect', 'hexagon', 'diamond', 'shield'];
+            const baseShapes = ['circle', 'squircle', 'roundrect', 'square'];
+            const badgePositions = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+
+            const popularIcons = [
+                { name: 'heart', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>' },
+                { name: 'star', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+                { name: 'bell', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>' },
+                { name: 'users', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+                { name: 'rocket', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>' },
+                { name: 'shield', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6v7z"/></svg>' },
+                { name: 'message-square', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' },
+                { name: 'settings', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>' },
+                { name: 'camera', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>' },
+                { name: 'music', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' }
+            ];
+
+            function rollRandomIcon() {
+                const idx1 = Math.floor(Math.random() * brandColors.length);
+                let idx2 = Math.floor(Math.random() * brandColors.length);
+                while (idx2 === idx1) {
+                    idx2 = Math.floor(Math.random() * brandColors.length);
+                }
+                const bcolor = brandColors[idx1];
+                const bcolor2 = brandColors[idx2];
+                const angle = Math.floor(Math.random() * 360);
+
+                const baseShape = baseShapes[Math.floor(Math.random() * baseShapes.length)];
+                const badgeShape = badgeShapes[Math.floor(Math.random() * badgeShapes.length)];
+                const badgeColor = brandColors[Math.floor(Math.random() * brandColors.length)];
+                const badgePos = badgePositions[Math.floor(Math.random() * badgePositions.length)];
+
+                const centerIcon = popularIcons[Math.floor(Math.random() * popularIcons.length)];
+                const badgeIcon = popularIcons[Math.floor(Math.random() * popularIcons.length)];
+
+                sandboxBackdrop.style.background = `linear-gradient(${angle}deg, ${bcolor}, ${bcolor2})`;
+                const baseShapeStyles = { squircle: '22%', roundrect: '12%', circle: '50%', square: '0' };
+                sandboxBackdrop.style.borderRadius = baseShapeStyles[baseShape] || '22%';
+                sandboxCenter.innerHTML = centerIcon.svg;
+
+                const ss = shapeStyles[badgeShape] || shapeStyles['circle'];
+                sandboxBadgeShape.style.background = badgeColor;
+                sandboxBadgeShape.style.borderRadius = ss.borderRadius;
+                sandboxBadgeShape.style.clipPath = ss.clipPath;
+                sandboxBadgeShape.innerHTML = badgeIcon.svg;
+
+                const ps = posStyles[badgePos] || posStyles['bottom-right'];
+                Object.assign(sandboxBadge.style, { top: '', right: '', bottom: '', left: '' });
+                Object.assign(sandboxBadge.style, {
+                    top: ps.top || '',
+                    right: ps.right || '',
+                    bottom: ps.bottom || '',
+                    left: ps.left || '',
+                    transform: 'scale(1)'
+                });
+
+                const cleanBColor = bcolor.replace('#', '');
+                const cleanBColor2 = bcolor2.replace('#', '');
+                const cleanBadgeColor = badgeColor.replace('#', '');
+
+                const params = new URLSearchParams();
+                params.set('bshape', baseShape);
+                params.set('bcolor', cleanBColor);
+                params.set('bcolor2', cleanBColor2);
+                params.set('ga', angle);
+                params.set('shape', badgeShape);
+                params.set('color', cleanBadgeColor);
+                params.set('icon', badgeIcon.name);
+                params.set('pos', badgePos);
+                params.set('bt', '');
+
+                btnCustomizeRandom.href = `app/?${params.toString()}`;
+            }
+
+            if (btnRollRandom) {
+                btnRollRandom.addEventListener('click', rollRandomIcon);
+                rollRandomIcon();
+            }
         });
     </script>
 

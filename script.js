@@ -33,6 +33,10 @@ const APP_CONFIG = {
     baseCRT: { url: 'bcrt', default: false, type: 'bool' },
     baseMono: { url: 'bm', default: false, type: 'bool' },
     baseZoom: { url: 'bz', default: 100, type: 'int' },
+    baseContentType: { url: 'btype', default: 'image', type: 'string' },
+    baseIconName: { url: 'bicon', default: 'sparkles', type: 'string' },
+    baseIconColor: { url: 'biconc', default: '#ffffff', type: 'color' },
+    baseIconScale: { url: 'bicons', default: 70, type: 'int' },
 };
 
 // Initialize state from config defaults
@@ -161,6 +165,19 @@ function init() {
         colorContainer.appendChild(swatch);
     });
 
+    // Render base icon colors
+    const baseIconColorContainer = document.getElementById('base-icon-color-presets');
+    if (baseIconColorContainer) {
+        colors.forEach(c => {
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.style.backgroundColor = c;
+            swatch.onclick = () => setBaseIconColor(c);
+            if (c === state.baseIconColor) swatch.classList.add('active');
+            baseIconColorContainer.appendChild(swatch);
+        });
+    }
+
     // Initialize visual state
     setShape(state.shape);
     setColor(state.color);
@@ -180,6 +197,10 @@ function init() {
     setBaseTextColor(state.baseTextColor);
     setBaseFrame(state.baseFrame);
     setBaseImageZoom(state.baseZoom);
+    setBaseContentType(state.baseContentType);
+    setBaseIconName(state.baseIconName);
+    setBaseIconColor(state.baseIconColor);
+    setBaseIconScale(state.baseIconScale);
     applyBaseEffects();
 
     if (state.customBaseIcon) {
@@ -200,6 +221,48 @@ function init() {
     // Setup dynamic scaling
     window.addEventListener('resize', updateAppScale);
     updateAppScale();
+
+    // Auto-highlight base icon text on focus and tap/click
+    const baseIconInputEl = document.getElementById('base-icon-input');
+    if (baseIconInputEl) {
+        let preventClearSelection = false;
+
+        baseIconInputEl.addEventListener('focus', function () {
+            showBaseIconSuggestions();
+            preventClearSelection = true;
+            setTimeout(() => {
+                this.select();
+            }, 0);
+        });
+
+        baseIconInputEl.addEventListener('click', function () {
+            showBaseIconSuggestions();
+        });
+
+        baseIconInputEl.addEventListener('mouseup', function (e) {
+            if (preventClearSelection) {
+                e.preventDefault();
+                preventClearSelection = false;
+            }
+        });
+
+        baseIconInputEl.addEventListener('touchend', function (e) {
+            if (preventClearSelection) {
+                e.preventDefault();
+                preventClearSelection = false;
+            }
+        });
+        
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('base-icon-dropdown');
+            if (dropdown && !baseIconInputEl.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+                baseIconInputEl.setAttribute('aria-expanded', 'false');
+                baseIconSelectedIndex = -1;
+            }
+        });
+    }
 
     // Subtle feedback for character limit
     const baseTextInput = document.getElementById('base-text-input');
@@ -239,80 +302,53 @@ function init() {
 }
 
 function setupStickyMobilePreview() {
-    const canvas = document.querySelector('.icon-canvas-wrapper');
-    const header = document.querySelector('.preview-header');
-    const actions = document.querySelector('.preview-actions');
-    if (!canvas) return;
-
-    // Use IntersectionObserver to toggle a class when the element becomes stuck
-    const observer = new IntersectionObserver(
-        ([e]) => {
-            e.target.classList.toggle('is-stuck', e.intersectionRatio < 1);
-        },
-        {
-            threshold: [1],
-            rootMargin: '-80px 0px 0px 0px' // Matches the -5rem top in CSS
-        }
-    );
     const previewSection = document.querySelector('.preview-section');
-    if (previewSection) observer.observe(previewSection);
+    if (!previewSection) return;
 
-    const preview = previewSection;
-    let scrollUpdateScheduled = false;
+    // Reset old sticky variables to ensure clean slate
+    document.documentElement.style.removeProperty('--sticky-scale');
+    document.documentElement.style.removeProperty('--sticky-opacity');
+    document.documentElement.style.removeProperty('--sticky-pointer');
+    document.documentElement.style.removeProperty('--sticky-margin');
+    document.documentElement.style.removeProperty('--sticky-actions-h');
+    document.documentElement.style.removeProperty('--sticky-actions-m');
+    previewSection.style.paddingTop = '';
+    previewSection.style.paddingBottom = '';
 
-    const updateStickyState = () => {
-        const isLandscapeMobile = window.innerWidth > window.innerHeight && window.innerHeight < 500;
-        const isTablet = window.innerWidth >= 900 && window.innerWidth <= 1150;
-        if (window.innerWidth > 1150 || isLandscapeMobile || isTablet || document.body.classList.contains('screenshot-mode')) {
-            // Reset variables if not in mobile/normal mode or if in landscape mobile
-            document.documentElement.style.removeProperty('--sticky-scale');
-            document.documentElement.style.removeProperty('--sticky-opacity');
-            document.documentElement.style.removeProperty('--sticky-pointer');
-            document.documentElement.style.removeProperty('--sticky-margin');
-            document.documentElement.style.removeProperty('--sticky-actions-h');
-            document.documentElement.style.removeProperty('--sticky-actions-m');
-
-            if (preview) {
-                preview.classList.remove('is-stuck');
-                preview.style.paddingTop = '';
-                preview.style.paddingBottom = '';
+    // Set up ResizeObserver to track exact height of preview-section
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            const height = entry.target.clientHeight;
+            document.documentElement.style.setProperty('--preview-height', `${height}px`);
+            if (!document.body.classList.contains('scrolled')) {
+                document.documentElement.style.setProperty('--non-shrunk-height', `${height}px`);
             }
-            return;
         }
+    });
+    resizeObserver.observe(previewSection);
 
-        const scrollY = window.scrollY;
-        const startScroll = 50;
-        const activeScroll = Math.max(0, scrollY - startScroll);
-        const maxScroll = 120;
-        const factor = Math.min(1, activeScroll / maxScroll);
-
-        const scale = 1 - (factor * 0.4);
-        const opacity = 1 - (factor * 2.5); // Fade out actions very quickly
-        const actionsH = factor > 0.6 ? 0 : 200 * (1 - factor * 1.6);
-        const actionsM = factor > 0.6 ? 0 : 0.5 * (1 - factor * 1.6);
-        const margin = - (factor * 40);
-
-        document.documentElement.style.setProperty('--sticky-scale', scale);
-        document.documentElement.style.setProperty('--sticky-opacity', Math.max(0, opacity));
-        document.documentElement.style.setProperty('--sticky-pointer', opacity < 0.1 ? 'none' : 'all');
-        document.documentElement.style.setProperty('--sticky-margin', `${margin}%`);
-        document.documentElement.style.setProperty('--sticky-actions-h', `${actionsH}px`);
-        document.documentElement.style.setProperty('--sticky-actions-m', `${actionsM}rem`);
-
-        const paddingBottom = 2.25 - (factor * 1.75);
-        if (preview) {
-            preview.style.paddingBottom = `${paddingBottom}rem`;
+    function handleMobileScroll() {
+        if (window.innerWidth <= 1150) {
+            const scrollY = window.scrollY;
+            const maxScroll = 80;
+            const scrollProgress = Math.min(1, Math.max(0, scrollY / maxScroll));
+            document.documentElement.style.setProperty('--scroll-progress', scrollProgress);
+            if (scrollY > 40) {
+                if (!document.body.classList.contains('scrolled')) {
+                    document.body.classList.add('scrolled');
+                }
+            } else {
+                document.body.classList.remove('scrolled');
+            }
+        } else {
+            document.body.classList.remove('scrolled');
+            document.documentElement.style.setProperty('--scroll-progress', 0);
         }
-    };
+    }
 
-    window.addEventListener('scroll', () => {
-        if (scrollUpdateScheduled) return;
-        scrollUpdateScheduled = true;
-        requestAnimationFrame(() => {
-            scrollUpdateScheduled = false;
-            updateStickyState();
-        });
-    }, { passive: true });
+    window.addEventListener('scroll', handleMobileScroll, { passive: true });
+    window.addEventListener('resize', handleMobileScroll, { passive: true });
+    handleMobileScroll();
 }
 
 function updateAppScale() {
@@ -510,12 +546,19 @@ function updateRemoveButtonVisibility() {
 }
 
 function updateBaseControls() {
+    const type = state.baseContentType || 'image';
     const hasCustomIcon = !!state.customBaseIcon;
     const gradientControls = document.getElementById('base-gradient-controls');
     const imageControls = document.getElementById('base-image-controls');
 
-    if (gradientControls) gradientControls.classList.toggle('hidden', hasCustomIcon);
-    if (imageControls) imageControls.classList.toggle('hidden', !hasCustomIcon);
+    if (type === 'image') {
+        if (gradientControls) gradientControls.classList.toggle('hidden', hasCustomIcon);
+        if (imageControls) imageControls.classList.toggle('hidden', !hasCustomIcon);
+    } else {
+        // Text or Icon: always show gradient controls, hide image controls
+        if (gradientControls) gradientControls.classList.remove('hidden');
+        if (imageControls) imageControls.classList.add('hidden');
+    }
 }
 
 function setBaseImageZoom(v) {
@@ -543,9 +586,38 @@ function setShape(s) {
     // Special scaling for diamond to fit icons better
     iconEl.classList.toggle('diamond-scaling', s === 'diamond');
 
+    const select = document.getElementById('badge-shape-select');
+    if (select) select.value = s;
+
     document.querySelectorAll('.shape-btn').forEach(btn => {
         if (btn.dataset.shape) btn.classList.toggle('active', btn.dataset.shape === s);
     });
+    syncStateToURL();
+}
+
+function setBaseContentType(type) {
+    triggerHaptic();
+    state.baseContentType = type;
+
+    // Toggle active state on buttons
+    document.querySelectorAll('[data-base-content-type]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.baseContentType === type);
+    });
+
+    // Update visibility of control groups
+    const imageUploadGroup = document.getElementById('base-image-upload-group');
+    const imageControls = document.getElementById('base-image-controls');
+    const textControls = document.getElementById('base-text-controls');
+    const iconControls = document.getElementById('base-icon-controls');
+
+    if (imageUploadGroup) imageUploadGroup.style.display = type === 'image' ? 'block' : 'none';
+    if (imageControls) imageControls.style.display = type === 'image' ? 'block' : 'none';
+    if (textControls) textControls.style.display = type === 'text' ? 'block' : 'none';
+    if (iconControls) iconControls.style.display = type === 'icon' ? 'block' : 'none';
+
+    updateBasePreview();
+    updateBaseBackground();
+    updateBaseControls();
     syncStateToURL();
 }
 
@@ -705,6 +777,15 @@ function setBaseText(val) {
         countEl.classList.toggle('at-limit', val.length >= 30);
     }
 
+    const textColorUi = document.getElementById('base-text-color-ui');
+    if (textColorUi) {
+        if (val.trim() !== '') {
+            textColorUi.style.display = 'flex';
+        } else {
+            textColorUi.style.display = 'none';
+        }
+    }
+
     updateBasePreview();
     syncStateToURL();
 }
@@ -717,6 +798,109 @@ function setBaseTextColor(color) {
     if (ui) ui.style.setProperty('--swatch-color', color);
     updateBasePreview();
     syncStateToURL();
+}
+
+function setBaseIconName(name, shouldHideDropdown = true) {
+    triggerHaptic();
+    if (shouldHideDropdown) {
+        const dropdown = document.getElementById('base-icon-dropdown');
+        if (dropdown) dropdown.classList.remove('active');
+        baseIconSelectedIndex = -1;
+    }
+    state.baseIconName = name;
+    const input = document.getElementById('base-icon-input');
+    if (input) input.value = name;
+    
+    // Update preview
+    updateBasePreview();
+    syncStateToURL();
+}
+
+function setBaseIconColor(color) {
+    state.baseIconColor = color;
+    const customColorInput = document.getElementById('base-icon-color');
+    if (customColorInput) customColorInput.value = color;
+    const customColorUi = document.getElementById('base-icon-color-ui');
+    if (customColorUi) customColorUi.style.setProperty('--swatch-color', color);
+
+    let matchedPreset = false;
+    document.querySelectorAll('#base-icon-color-presets .color-swatch').forEach(sw => {
+        const isActive = sw.style.backgroundColor === color || sw.style.backgroundColor.toLowerCase() === color.toLowerCase();
+        sw.classList.toggle('active', isActive);
+        if (isActive) matchedPreset = true;
+    });
+
+    if (customColorUi) customColorUi.classList.toggle('active', !matchedPreset);
+
+    // Update preview
+    updateBasePreview();
+    syncStateToURL();
+}
+
+function setBaseIconScale(scale) {
+    state.baseIconScale = parseInt(scale);
+    const valEl = document.getElementById('base-icon-scale-val');
+    if (valEl) valEl.innerText = scale;
+    const input = document.getElementById('base-icon-scale-input');
+    if (input) input.value = scale;
+
+    // Update preview
+    updateBasePreview();
+    syncStateToURL();
+}
+
+let baseIconSelectedIndex = -1;
+
+function handleBaseIconInput(val) {
+    setBaseIconName(val, false);
+    filterBaseIconSuggestions(val);
+}
+
+function showBaseIconSuggestions() {
+    const dropdown = document.getElementById('base-icon-dropdown');
+    if (!dropdown) return;
+    dropdown.classList.add('active');
+    const input = document.getElementById('base-icon-input');
+    if (input) input.setAttribute('aria-expanded', 'true');
+    filterBaseIconSuggestions(input.value);
+}
+
+function filterBaseIconSuggestions(val) {
+    const dropdown = document.getElementById('base-icon-dropdown');
+    if (!dropdown) return;
+    const query = val.toLowerCase();
+
+    const filtered = ALL_ICONS
+        .filter(icon => icon.includes(query))
+        .sort((a, b) => {
+            if (a === query) return -1;
+            if (b === query) return 1;
+            const aStarts = a.startsWith(query);
+            const bStarts = b.startsWith(query);
+            if (aStarts && !bStarts) return -1;
+            if (bStarts && !aStarts) return 1;
+            return a.localeCompare(b);
+        })
+        .slice(0, 48);
+
+    if (filtered.length === 0) {
+        dropdown.classList.remove('active');
+        const input = document.getElementById('base-icon-input');
+        if (input) input.setAttribute('aria-expanded', 'false');
+        baseIconSelectedIndex = -1;
+        return;
+    }
+
+    dropdown.innerHTML = filtered.map((icon, idx) => `
+        <div class="dropdown-item ${idx === baseIconSelectedIndex ? 'selected' : ''}" onclick="setBaseIconName('${icon}')" title="${icon}" data-index="${idx}">
+            <i data-lucide="${icon}"></i>
+        </div>
+    `).join('');
+
+    dropdown.classList.add('active');
+    const input = document.getElementById('base-icon-input');
+    if (input) input.setAttribute('aria-expanded', 'true');
+    lucide.createIcons();
 }
 
 function calculateDynamicFontSize(text, canvasWidth) {
@@ -746,39 +930,51 @@ function calculateDynamicFontSize(text, canvasWidth) {
 function updateBasePreview() {
     const imgEl = document.getElementById('base-img');
     const textEl = document.getElementById('base-text');
+    const baseIconEl = document.getElementById('base-icon-target');
 
-    const hasCustomIcon = !!state.customBaseIcon;
-    const hasText = state.baseText && state.baseText.trim() !== '';
-    const isDefaultText = state.baseText === 'YOUR TEXT';
+    const type = state.baseContentType || 'image';
 
-    if (hasCustomIcon) {
-        imgEl.style.display = 'block';
-        if (imgEl.src !== state.customBaseIcon) {
-            imgEl.src = state.customBaseIcon;
+    if (imgEl) imgEl.style.display = 'none';
+    if (textEl) textEl.style.display = 'none';
+    if (baseIconEl) baseIconEl.style.display = 'none';
+
+    if (type === 'image') {
+        const hasCustomIcon = !!state.customBaseIcon;
+        if (hasCustomIcon && imgEl) {
+            imgEl.style.display = 'block';
+            if (imgEl.src !== state.customBaseIcon) {
+                imgEl.src = state.customBaseIcon;
+            }
         }
-    } else {
-        imgEl.style.display = 'none';
-    }
+    } else if (type === 'text') {
+        const hasText = state.baseText && state.baseText.trim() !== '';
+        if (hasText && textEl) {
+            textEl.style.display = 'flex';
+            const textToShow = state.baseText;
+            textEl.innerText = textToShow;
+            textEl.style.color = state.baseTextColor;
 
-    if (hasText && !(hasCustomIcon && isDefaultText)) {
-        textEl.style.display = 'flex';
+            const canvas = document.getElementById('icon-canvas');
+            const canvasWidth = canvas ? canvas.offsetWidth : 320;
+            const fontSizePx = calculateDynamicFontSize(textToShow, canvasWidth);
 
-        const textToShow = state.baseText;
-        textEl.innerText = textToShow;
-        textEl.style.color = state.baseTextColor;
+            textEl.style.fontSize = fontSizePx + 'px';
+            textEl.style.lineHeight = '0.95';
 
-        // Font size scaling: Now using pixel calculation for stability across browsers/zoom levels
-        const canvas = document.getElementById('icon-canvas');
-        const canvasWidth = canvas ? canvas.offsetWidth : 320;
-        const fontSizePx = calculateDynamicFontSize(textToShow, canvasWidth);
+            const shadow = state.showShadows ? '0 10px 15px rgba(0,0,0,0.3)' : 'none';
+            textEl.style.textShadow = shadow;
+        }
+    } else if (type === 'icon') {
+        if (baseIconEl) {
+            baseIconEl.style.display = 'flex';
+            const name = state.baseIconName || 'sparkles';
+            baseIconEl.innerHTML = `<i data-lucide="${name}"></i>`;
+            lucide.createIcons();
 
-        textEl.style.fontSize = fontSizePx + 'px';
-        textEl.style.lineHeight = '0.95';
-
-        const shadow = state.showShadows ? '0 10px 15px rgba(0,0,0,0.3)' : 'none';
-        textEl.style.textShadow = shadow;
-    } else {
-        textEl.style.display = 'none';
+            const scale = state.baseIconScale || 70;
+            baseIconEl.style.setProperty('--base-icon-size', scale + '%');
+            baseIconEl.style.setProperty('--base-icon-color', state.baseIconColor || '#ffffff');
+        }
     }
 }
 
@@ -786,8 +982,9 @@ function updateBaseBackground() {
     const bg = document.getElementById('base-bg');
     if (!bg) return;
 
-    // If there's a custom icon, hide the background gradient
-    if (state.customBaseIcon) {
+    // If there's a custom icon and we are in image mode, hide the background gradient
+    const type = state.baseContentType || 'image';
+    if (type === 'image' && state.customBaseIcon) {
         bg.style.background = 'transparent';
         return;
     }
@@ -1117,6 +1314,7 @@ function setBadgePosition(pos) {
     const canvas = document.getElementById('icon-canvas');
     const wrap = document.getElementById('badge-wrap');
     const extraSettings = document.getElementById('badge-settings-extra');
+    const placeholderMsg = document.getElementById('badge-placeholder-message');
 
     // Remove old position classes
     canvas.classList.remove('pos-top-left', 'pos-top-right', 'pos-bottom-left', 'pos-bottom-right');
@@ -1125,9 +1323,11 @@ function setBadgePosition(pos) {
     if (pos === 'none') {
         wrap.style.display = 'none';
         if (extraSettings) extraSettings.classList.add('hidden');
+        if (placeholderMsg) placeholderMsg.classList.remove('hidden');
     } else {
         wrap.style.display = 'flex';
         if (extraSettings) extraSettings.classList.remove('hidden');
+        if (placeholderMsg) placeholderMsg.classList.add('hidden');
         // Add new position classes
         canvas.classList.add('pos-' + pos);
         wrap.classList.add('pos-' + pos);
@@ -1326,6 +1526,9 @@ function resetDefaults() {
     updateRemoveButtonVisibility();
     updateBaseControls();
     updateBasePreview();
+
+    // Switch tab back to base
+    switchTab('base');
 
     // Sync final state to URL
     syncStateToURL();
@@ -1540,13 +1743,14 @@ async function exportPNG() {
 
         // ── 3. Draw base layer ──
         // Draw content to a temp canvas first so ctx.filter applies to the whole layer
-        if (statusText && state.customBaseIcon) statusText.textContent = 'Loading image...';
+        const contentType = state.baseContentType || 'image';
+        if (statusText && contentType === 'image' && state.customBaseIcon) statusText.textContent = 'Loading image...';
         const bs = Math.ceil(baseSize);
         const baseCanvas = document.createElement('canvas');
         baseCanvas.width = bs; baseCanvas.height = bs;
         const bCtx = baseCanvas.getContext('2d');
 
-        if (state.customBaseIcon) {
+        if (contentType === 'image' && state.customBaseIcon) {
             try {
                 const img = await loadImageCORS(state.customBaseIcon);
                 const zoom = (state.baseZoom || 100) / 100;
@@ -1761,36 +1965,73 @@ async function exportPNG() {
         ctx.shadowColor = 'transparent';
         ctx.restore();
 
-        // ── 4. Draw base text ──
-        if (state.baseText && state.baseText.trim()) {
+        // ── 4. Draw base text or icon ──
+        if (contentType === 'text') {
+            if (state.baseText && state.baseText.trim()) {
+                ctx.save();
+                const fontSize = calculateDynamicFontSize(state.baseText, SIZE);
+                ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
+                ctx.fillStyle = state.baseTextColor || '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                if (state.showShadows) {
+                    ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                    ctx.shadowBlur = SIZE * 0.015;
+                    ctx.shadowOffsetY = SIZE * 0.01;
+                }
+                // Word-wrap the text
+                const words = state.baseText.split(' ');
+                const lines = [];
+                let current = '';
+                for (const w of words) {
+                    const test = current ? current + ' ' + w : w;
+                    if (ctx.measureText(test).width > baseSize * 0.85 && current) {
+                        lines.push(current); current = w;
+                    } else { current = test; }
+                }
+                if (current) lines.push(current);
+                const lineH = fontSize * 0.95;
+                const totalH = lines.length * lineH;
+                const startY = by + baseSize / 2 - totalH / 2 + lineH / 2;
+                lines.forEach((line, i) => {
+                    ctx.fillText(line, bx + baseSize / 2, startY + i * lineH);
+                });
+                ctx.restore();
+            }
+        } else if (contentType === 'icon') {
+            if (statusText) statusText.textContent = 'Rendering base icon...';
+            const iconScale = (state.baseIconScale || 70) / 100;
+            const iconSize = baseSize * iconScale;
+            const iconColor = state.baseIconColor || '#ffffff';
+            const iconOff = -iconSize / 2;
+
             ctx.save();
-            const fontSize = calculateDynamicFontSize(state.baseText, SIZE);
-            ctx.font = `700 ${fontSize}px Outfit, sans-serif`;
-            ctx.fillStyle = state.baseTextColor || '#ffffff';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+            ctx.translate(bx + baseSize / 2, by + baseSize / 2);
+
             if (state.showShadows) {
                 ctx.shadowColor = 'rgba(0,0,0,0.3)';
-                ctx.shadowBlur = SIZE * 0.015;
-                ctx.shadowOffsetY = SIZE * 0.01;
+                ctx.shadowBlur = iconSize * 0.12;
+                ctx.shadowOffsetY = iconSize * 0.06;
             }
-            // Word-wrap the text
-            const words = state.baseText.split(' ');
-            const lines = [];
-            let current = '';
-            for (const w of words) {
-                const test = current ? current + ' ' + w : w;
-                if (ctx.measureText(test).width > baseSize * 0.85 && current) {
-                    lines.push(current); current = w;
-                } else { current = test; }
+
+            const svgEl = document.querySelector('#base-icon-target svg');
+            if (svgEl) {
+                const svgClone = svgEl.cloneNode(true);
+                svgClone.setAttribute('width', iconSize);
+                svgClone.setAttribute('height', iconSize);
+                svgClone.setAttribute('color', iconColor);
+                svgClone.querySelectorAll('[stroke="currentColor"]').forEach(el => el.setAttribute('stroke', iconColor));
+                svgClone.querySelectorAll('[fill="currentColor"]').forEach(el => el.setAttribute('fill', iconColor));
+                const svgStr = new XMLSerializer().serializeToString(svgClone);
+                const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+                try {
+                    const svgImg = await loadImageCORS(url);
+                    ctx.drawImage(svgImg, iconOff, iconOff, iconSize, iconSize);
+                } finally {
+                    URL.revokeObjectURL(url);
+                }
             }
-            if (current) lines.push(current);
-            const lineH = fontSize * 0.95;
-            const totalH = lines.length * lineH;
-            const startY = by + baseSize / 2 - totalH / 2 + lineH / 2;
-            lines.forEach((line, i) => {
-                ctx.fillText(line, bx + baseSize / 2, startY + i * lineH);
-            });
             ctx.restore();
         }
 
@@ -1981,6 +2222,16 @@ function toggleBaseDrawer() {
 
     drawer.classList.toggle('active');
     trigger.classList.toggle('active');
+}
+
+function switchTab(tabName) {
+    triggerHaptic();
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    document.querySelectorAll('.tab-content').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-panel-${tabName}`);
+    });
 }
 
 // Ensure drawer is reset if window is resized above mobile breakpoint
