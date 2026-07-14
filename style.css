@@ -3549,6 +3549,7 @@ input[type="range"]:focus-visible::-moz-range-thumb {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    position: relative;
 }
 
 .footer-copyright,
@@ -3565,6 +3566,10 @@ a.site-signature {
 .footer-links {
     display: flex;
     gap: 1.5rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .footer-link:hover,
@@ -3761,11 +3766,14 @@ body.marketing-home {
 
 /* Steps Grid */
 .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    gap: 2rem;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 0;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .step-card {
@@ -3778,8 +3786,32 @@ body.marketing-home {
     flex-direction: column;
     justify-content: space-between;
     gap: 1.5rem;
-    transition: all 0.3s ease;
-    height: 100%;
+    height: auto;
+    width: 100%;
+    max-width: 460px;
+    will-change: transform;
+    transform: translateY(0);
+    transition: transform 0.1s ease-out;
+}
+
+.step-card.card-left {
+    align-self: flex-start;
+    margin-left: 5%;
+    margin-bottom: -5rem;
+    z-index: 2;
+}
+
+.step-card.card-right {
+    align-self: flex-end;
+    margin-right: 5%;
+    margin-bottom: -5rem;
+    z-index: 1;
+}
+
+.step-card.card-center {
+    align-self: center;
+    margin-bottom: 2rem;
+    z-index: 3;
 }
 
 [data-theme="light"] .step-card {
@@ -3884,7 +3916,19 @@ body.marketing-home {
     }
 
     .steps-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    .step-card.card-left,
+    .step-card.card-right,
+    .step-card.card-center {
+        align-self: center;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+        transform: none !important;
     }
 
     .features-grid {
