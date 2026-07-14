@@ -133,6 +133,10 @@ function loadStateFromURL() {
         state.customBaseIcon = val;
     }
 
+    if (!params.has('btype') && !params.has('img')) {
+        state.baseContentType = 'text';
+    }
+
     if (params.get('mode') === 'screenshot') {
         document.body.classList.add('screenshot-mode');
     }

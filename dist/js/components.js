@@ -75,7 +75,7 @@ class IconStudioFooter extends HTMLElement {
         this.innerHTML = /*html*/ `
             <footer class="page-footer">
                 <div class="footer-container">
-                    <p class="footer-copyright">&copy; <span id="copyright-year">${new Date().getFullYear()}</span> Icon Studio • <a href="https://ryanmarch.me/">Ryan March</a></p>
+                    <p class="footer-copyright">&copy; <span id="copyright-year">${new Date().getFullYear()}</span> Icon Studio • <a class="site-signature" href="https://ryanmarch.me/">Ryan March</a></p>
                     <div class="footer-links">
                         <a href="/terms/" class="footer-link">Terms</a>
                         <a href="/terms/#privacy-policy" class="footer-link">Privacy</a>

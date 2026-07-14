@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "id": "get-started",
+    "title": "Getting Started",
+    "path": "get-started/",
+    "category": "Basics",
+    "headings": [
+      "Overview",
+      "Workspace Layout",
+      "Creating Your First Icon"
+    ],
+    "excerpt": "Learn how to set up, configure, and design your first icon with Icon Studio.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "exporting",
+    "title": "Exporting Designs",
+    "path": "exporting/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "PNG Export",
+      "SVG Export"
+    ],
+    "excerpt": "Export your designed icons as PNGs, SVGs, or copy code for direct integration.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "sharing",
+    "title": "Sharing Designs",
+    "path": "sharing/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "Shareable Links"
+    ],
+    "excerpt": "Share your icons using shareable URLs or embed code on your website.",
+    "lastUpdated": "2026-07-14"
+  }
+]

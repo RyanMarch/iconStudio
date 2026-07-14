@@ -111,6 +111,7 @@ async function main() {
     </head>
 
     <body class="user-docs-page">
+        <docs-header></docs-header>
         <div class="app-container">
             <!-- Mobile Navigation Overlay -->
             <div id="mobile-overlay" class="mobile-overlay"></div>
@@ -119,9 +120,8 @@ async function main() {
                 <!-- Sidebar Navigation -->
                 <docs-sidebar></docs-sidebar>
 
-                <!-- Right-side Content & Header Wrapper -->
+                <!-- Right-side Content Wrapper -->
                 <div class="page-content-wrapper">
-                    <docs-header></docs-header>
 
                     <!-- Content Area -->
                     <docs-anchor-helper>

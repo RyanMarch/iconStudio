@@ -30,13 +30,33 @@ function stemMatch(targetText, queryText) {
     });
 }
 
+function getBasePath() {
+    const path = window.location.pathname;
+    if (/\/terms\//.test(path) || path.endsWith('/terms')) {
+        return '../support/';
+    }
+    const isSub = /\/docs\/[^\/]+\//.test(path) || (!path.endsWith('/support/') && path.split('/support/')[1]?.length > 0 && path.split('/support/')[1].includes('/'));
+    return isSub ? '../' : '';
+}
+
+function hasSidebar() {
+    const path = window.location.pathname;
+    if (/\/terms\//.test(path) || path.endsWith('/terms')) {
+        return true;
+    }
+    return /\/docs\/[^\/]+\//.test(path) || (!path.endsWith('/support/') && path.split('/support/')[1]?.length > 0 && path.split('/support/')[1].includes('/'));
+}
+
 class DocsLogo extends HTMLElement {
+    isSubpage() {
+        const path = window.location.pathname;
+        return /\/docs\/[^\/]+\//.test(path) || (!path.endsWith('/support/') && path.split('/support/')[1]?.length > 0 && path.split('/support/')[1].includes('/'));
+    }
+
     connectedCallback() {
+        const basePath = this.isSubpage() ? '../../' : '../';
         this.innerHTML = /*html*/ `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-            </svg>
+            <img src="${basePath}assets/favicon/favicon.svg" alt="Icon Studio Logo" width="24" height="24" class="logo-image" style="display: block; object-fit: contain;" />
         `;
     }
 }
@@ -65,7 +85,7 @@ class DocsHeaderNav extends HTMLElement {
     }
 
     render() {
-        const basePath = this.isSubpage() ? '../' : '';
+        const basePath = getBasePath();
         const appUrl = this.getAttribute('app-url') || `${basePath}../`;
         const docsUrl = this.getAttribute('docs-url') || `${basePath}./`;
         const activeTab = this.getAttribute('active-tab');
@@ -131,7 +151,7 @@ class DocsHeader extends HTMLElement {
 
     connectedCallback() {
         this.style.display = 'contents';
-        const basePath = this.isSubpage() ? '../' : '';
+        const basePath = getBasePath();
         const appUrl = this.getAttribute('app-url') || `${basePath}../`;
         const docsUrl = this.getAttribute('docs-url') || `${basePath}./`;
         const showLogo = this.getAttribute('show-logo') !== 'false';
@@ -213,7 +233,7 @@ class DocsHeader extends HTMLElement {
         const toggleMenu = () => {
             let isOpen = false;
 
-            if (this.isSubpage() && sidebar) {
+            if (hasSidebar() && sidebar) {
                 const pageSidebar = sidebar.querySelector('.page-sidebar');
                 if (pageSidebar) {
                     isOpen = pageSidebar.classList.toggle('active');
@@ -228,7 +248,7 @@ class DocsHeader extends HTMLElement {
             if (isOpen) {
                 if (menuIcon) menuIcon.style.display = 'none';
                 if (closeIcon) closeIcon.style.display = 'block';
-                if (this.isSubpage()) {
+                if (hasSidebar()) {
                     document.body.style.overflow = 'hidden';
                 }
             } else {
@@ -275,7 +295,7 @@ class DocsHeader extends HTMLElement {
         this.isLoading = true;
 
         try {
-            const basePath = this.isSubpage() ? '../' : '';
+            const basePath = getBasePath();
             const response = await fetch(`${basePath}search-index.json`);
             if (response.ok) {
                 this.index = await response.json();
@@ -376,7 +396,7 @@ class DocsHeader extends HTMLElement {
                 .sort((a, b) => b.score - a.score)
                 .map(res => res.item);
 
-            const basePath = this.isSubpage() ? '../' : '';
+            const basePath = getBasePath();
             let html = '';
             if (results.length === 0) {
                 html += '<div class="search-status">No results found</div>';
@@ -449,7 +469,7 @@ class DocsSidebar extends HTMLElement {
 
     connectedCallback() {
         this.style.display = 'contents';
-        const basePath = this.isSubpage() ? '../' : '';
+        const basePath = getBasePath();
         const appUrl = this.getAttribute('app-url') || `${basePath}../`;
         const prefix = this.isSubpage() ? '../' : './';
 
@@ -474,19 +494,49 @@ class DocsSidebar extends HTMLElement {
                     </a>
                 </div>
                 <ul class="sidebar-menu-list"></ul>
+                <div class="sidebar-footer">
+                    <div class="cta-card">
+                        <div class="cta-card-icon">
+                            <docs-logo></docs-logo>
+                        </div>
+                        <h4 class="cta-card-title">Icon Studio</h4>
+                        <p class="cta-card-desc">Design custom app icons, test with live previews, and customize colors, borders, shadows, and badges.</p>
+                        <a href="/app/" class="btn-cta-generator">
+                            <span>Go to Icon Studio</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14"
+                                height="14">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </nav>
         `;
 
         this.highlightActiveLink();
     }
 
+    static get observedAttributes() {
+        return ['app-url', 'hide-category', 'heading-depth', 'headingdepth'];
+    }
+
+    attributeChangedCallback() {
+        // Simple re-highlight/re-render check if attributes change
+        if (this.querySelector('.sidebar-menu-list')) {
+            this.highlightActiveLink();
+        }
+    }
+
     highlightActiveLink() {
         const currentHash = window.location.hash;
+        const hideCategory = this.hasAttribute('hide-category') || this.getAttribute('hide-category') === 'true';
+        const headingDepth = (this.getAttribute('heading-depth') || this.getAttribute('headingdepth') || 'h3').toLowerCase();
 
         // Insert category badge above the h1 in the content area
         const h1 = document.querySelector('.page-content h1');
-        if (h1 && !document.querySelector('.doc-page-category')) {
-            const basePath = this.isSubpage() ? '../' : '';
+        if (h1 && !document.querySelector('.doc-page-category') && !hideCategory) {
+            const basePath = getBasePath();
             fetch(`${basePath}search-index.json`)
                 .then(r => r.json())
                 .then(index => {
@@ -507,8 +557,13 @@ class DocsSidebar extends HTMLElement {
         setTimeout(() => {
             const menuList = this.querySelector('.sidebar-menu-list');
             if (menuList) {
+                // Clear any existing menu items first if we are re-highlighting/re-populating
+                menuList.innerHTML = '';
+
                 // Add Overview link if #overview exists
-                if (document.getElementById('overview')) {
+                const overviewEl = document.getElementById('overview');
+                const isTermsOrPrivacy = window.location.pathname.includes('/terms') || window.location.pathname.includes('/privacy');
+                if (overviewEl && !isTermsOrPrivacy) {
                     const overviewLi = document.createElement('li');
                     const overviewLink = document.createElement('a');
                     overviewLink.href = '#overview';
@@ -521,7 +576,8 @@ class DocsSidebar extends HTMLElement {
                     menuList.appendChild(overviewLi);
                 }
 
-                const headings = Array.from(document.querySelectorAll('.page-content h2, .page-content h3'));
+                const headingsSelector = headingDepth === 'h2' ? '.page-content h2' : '.page-content h2, .page-content h3';
+                const headings = Array.from(document.querySelectorAll(headingsSelector));
                 let currentH2Li = null;
                 let currentSublist = null;
 
@@ -630,9 +686,10 @@ class DocsTableOfContents extends HTMLElement {
 
         setTimeout(() => {
             const overviewEl = document.getElementById('overview');
+            const isTermsOrPrivacy = window.location.pathname.includes('/terms') || window.location.pathname.includes('/privacy');
             const headings = Array.from(document.querySelectorAll('.page-content h2, .page-content h3'));
 
-            if (headings.length === 0 && !overviewEl) {
+            if (headings.length === 0 && (!overviewEl || isTermsOrPrivacy)) {
                 this.innerHTML = '';
                 return;
             }
@@ -649,7 +706,7 @@ class DocsTableOfContents extends HTMLElement {
             const ul = document.createElement('ul');
             ul.className = 'toc-list';
 
-            if (overviewEl) {
+            if (overviewEl && !isTermsOrPrivacy) {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = '#overview';
@@ -818,7 +875,7 @@ class DocsSearch extends HTMLElement {
         this.isLoading = true;
 
         try {
-            const basePath = this.isSubpage() ? '../' : '';
+            const basePath = getBasePath();
             const response = await fetch(`${basePath}search-index.json`);
             if (response.ok) {
                 this.index = await response.json();
@@ -909,7 +966,7 @@ class DocsSearch extends HTMLElement {
                 .sort((a, b) => b.score - a.score)
                 .map(res => res.item);
 
-            const basePath = this.isSubpage() ? '../' : '';
+            const basePath = getBasePath();
             let html = '';
             if (results.length === 0) {
                 html += '<div class="search-status">No results found</div>';
@@ -988,8 +1045,7 @@ class DocsGrid extends HTMLElement {
         this.render();
     }
     async render() {
-        const isSubpage = /\/docs\/[^\/]+\//.test(window.location.pathname);
-        const basePath = isSubpage ? '../' : '';
+        const basePath = getBasePath();
         try {
             const response = await fetch(`${basePath}search-index.json`);
             if (!response.ok) throw new Error('Failed to load search-index.json');
@@ -1049,7 +1105,7 @@ class DocsFooter extends HTMLElement {
     }
 
     connectedCallback() {
-        const basePath = this.isSubpage() ? '../' : '';
+        const basePath = getBasePath();
         fetch(`${basePath}docs-config.json`)
             .then(r => r.ok ? r.json() : null)
             .then(config => {
@@ -1061,7 +1117,7 @@ class DocsFooter extends HTMLElement {
     }
 
     render(config) {
-        const basePath = this.isSubpage() ? '../' : '';
+        const basePath = getBasePath();
         const projectName = config.projectName || 'Help Center';
         const currentYear = new Date().getFullYear();
 
@@ -1089,7 +1145,7 @@ class DocsFooter extends HTMLElement {
             <footer class="app-footer">
                 <div class="footer-content">
                     <p class="footer-copyright">
-                        &copy; ${currentYear} ${projectName}
+                        &copy; ${currentYear} ${projectName} • <a class="site-signature" href="https://ryanmarch.me/">Ryan March</a>
                     </p>
                     ${footerLinks.length > 0 ? `
                     <div class="footer-nav-links">

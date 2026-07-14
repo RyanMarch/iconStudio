@@ -37,13 +37,17 @@
 </head>
 
 <body class="user-docs-page docs-list-page">
-    <div class="docs-app-viewport">
+    <docs-header></docs-header>
+    <div class="app-container">
         <!-- Mobile Navigation Overlay -->
         <div id="mobile-overlay" class="mobile-overlay"></div>
 
-        <main class="docs-layout-container">
-            <div class="docs-content-column">
-                <docs-header></docs-header>
+        <main class="page-container-fullwidth user-docs">
+            <!-- Sidebar Navigation (visible only on mobile) -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
 
                 <!-- List Content Area -->
                 <div class="list-container">

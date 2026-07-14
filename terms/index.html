@@ -47,221 +47,170 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../support/style.css">
     <link rel="stylesheet" href="style.css">
-    <script src="/js/components.js" type="module"></script>
+    <script src="../support/docs-components.js" type="module"></script>
 </head>
 
 <body class="user-docs-page">
-    <iconstudio-header active-page="terms"></iconstudio-header>
-
-    <!-- Mobile Navigation Overlay -->
-    <div id="mobile-overlay" class="mobile-overlay"></div>
-
+    <docs-header></docs-header>
     <div class="app-container">
-        <main class="page-container-sidebar">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
             <!-- Sidebar Navigation -->
-            <nav class="page-sidebar" aria-label="Documentation sections">
-                <div class="sidebar-logo">
-                    <a href="/" class="logo-link"
-                        style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--accent); margin-bottom: 1.5rem;">
-                        <iconstudio-logo style="width: 32px; height: 32px; display: inline-block;"></iconstudio-logo>
-                        <span
-                            style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.025em;">Icon Studio</span>
-                    </a>
-                </div>
-                <ul>
-                    <li><a href="#terms-of-service" class="sidebar-link active">Terms of Service</a></li>
-                    <li><a href="#privacy-policy" class="sidebar-link">Privacy Policy</a></li>
-                </ul>
-                <div class="sidebar-footer">
-                    <div class="cta-card">
-                        <div class="cta-card-icon">
-                            <iconstudio-logo style="width: 24px; height: 24px; display: inline-block;"></iconstudio-logo>
-                        </div>
-                        <h4 class="cta-card-title">Icon Studio</h4>
-                        <p class="cta-card-desc">Design custom app icons, test with live previews, and customize colors, borders, shadows, and badges.</p>
-                        <a href="../app/" class="btn-cta-generator">
-                            <span>Go to Icon Studio</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14"
-                                height="14">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+            <docs-sidebar hide-category heading-depth="h2"></docs-sidebar>
 
-            <!-- Content Area -->
-            <section class="page-content" aria-label="Terms of Service and Privacy Policy">
+            <!-- Right-side Content & Header Wrapper -->
+            <div class="page-content-wrapper">
 
-                <!-- Terms of Service -->
-                <article id="terms-of-service" class="doc-section">
-                    <h1>Terms and Conditions</h1>
-                    <p>Last updated: July 13, 2026</p>
-                    <p>Please read these terms and conditions carefully before using the Service.</p>
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="Terms of Service and Privacy Policy">
+                        
+                        <article id="overview" class="doc-section">
+                            <h1>Terms & Privacy</h1>
+                            <p class="lead">Please review our Terms of Service and Privacy Policy details below.</p>
+                        </article>
 
-                    <h2>1. Definitions & Scope</h2>
-                    <ul class="help-list">
-                        <li><strong>Company:</strong> Refers to Icon Studio.</li>
-                        <li><strong>Service:</strong> Refers to the Icon Studio web application accessible from <a
-                                href="https://iconstudio.ryanmarch.me/"
-                                target="_blank">https://iconstudio.ryanmarch.me/</a>.</li>
-                        <li><strong>You:</strong> Means the individual or entity accessing or using the Service.</li>
-                    </ul>
+                        <hr class="section-divider">
 
-                <h2>2. Acknowledgment & Usage</h2>
-                <p>By accessing or using the Service, you agree to be bound by these Terms. If you disagree with
-                    any part of these terms, you may not access the utility.</p>
-                <p>You agree not to use the Service to build icon formats or generate designs for purposes
-                    that violate local, state, or federal laws.</p>
+                        <!-- Terms of Service -->
+                        <article id="terms-of-service" class="doc-section">
+                            <h2>Terms of Service</h2>
+                            <p>Last updated: July 13, 2026</p>
+                            <p>Please read these terms and conditions carefully before using the Service.</p>
 
-                <h2>3. Intellectual Property</h2>
-                <p>The underlying source code, design components, graphics, and branding elements of Icon Studio
-                    are the exclusive property of the Company. The inputs, custom templates, icon styles, and final
-                    downloaded/exported assets generated by users belong entirely to the users.</p>
+                            <h3>1. Definitions & Scope</h3>
+                            <ul class="help-list">
+                                <li><strong>Company:</strong> Refers to Icon Studio.</li>
+                                <li><strong>Service:</strong> Refers to the Icon Studio web application accessible from <a
+                                        href="https://iconstudio.ryanmarch.me/"
+                                        target="_blank">https://iconstudio.ryanmarch.me/</a>.</li>
+                                <li><strong>You:</strong> Means the individual or entity accessing or using the Service.</li>
+                            </ul>
 
-                <h2>4. Limitation of Liability</h2>
-                <p>To the maximum extent permitted by applicable law, the Company shall not be liable for any
-                    indirect, incidental, special, or consequential damages whatsoever. This includes, but is
-                    not limited to, financial losses, data loss, or business interruptions arising out of:</p>
-                <ul class="help-list">
-                    <li>The failure of an exported icon to build, fit, or scale properly due to formatting
-                        parameters or user input errors.</li>
-                    <li>Errors in badge configurations, sizing, or export resolutions during icon design operations.</li>
-                    <li>Temporary downtime or routine maintenance of the hosting infrastructure.</li>
-                </ul>
+                            <h3>2. Acknowledgment & Usage</h3>
+                            <p>By accessing or using the Service, you agree to be bound by these Terms. If you disagree with
+                                any part of these terms, you may not access the utility.</p>
+                            <p>You agree not to use the Service to build icon formats or generate designs for purposes
+                                that violate local, state, or federal laws.</p>
 
-                <h2>5. "AS IS" and "AS AVAILABLE" Disclaimer</h2>
-                <p>The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects
-                    without warranty of any kind. The Company provides no warranty or undertaking that the
-                    utility will meet your precise requirements, operate entirely error-free, or perform design
-                    procedures across all operating systems and platforms without latency or interruption.</p>
+                            <h3>3. Intellectual Property</h3>
+                            <p>The underlying source code, design components, graphics, and branding elements of Icon Studio
+                                are the exclusive property of the Company. The inputs, custom templates, icon styles, and final
+                                downloaded/exported assets generated by users belong entirely to the users.</p>
 
-                <h2>6. Governing Law</h2>
-                <p>The laws of Ohio, United States, excluding its conflicts of law rules, shall govern these
-                    Terms and Your use of the Service.</p>
+                            <h3>4. Limitation of Liability</h3>
+                            <p>To the maximum extent permitted by applicable law, the Company shall not be liable for any
+                                indirect, incidental, special, or consequential damages whatsoever. This includes, but is
+                                not limited to, financial losses, data loss, or business interruptions arising out of:</p>
+                            <ul class="help-list">
+                                <li>The failure of an exported icon to build, fit, or scale properly due to formatting
+                                    parameters or user input errors.</li>
+                                <li>Errors in badge configurations, sizing, or export resolutions during icon design operations.</li>
+                                <li>Temporary downtime or routine maintenance of the hosting infrastructure.</li>
+                            </ul>
 
-                <h2>7. Termination</h2>
-                <p>We reserve the right to restrict or terminate access to the Service immediately, without
-                    prior notice, if we detect abusive traffic patterns, server exploitation attempts, or clear
-                    violations of these Terms.</p>
+                            <h3>5. "AS IS" and "AS AVAILABLE" Disclaimer</h3>
+                            <p>The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects
+                                without warranty of any kind. The Company provides no warranty or undertaking that the
+                                utility will meet your precise requirements, operate entirely error-free, or perform design
+                                procedures across all operating systems and platforms without latency or interruption.</p>
 
-                <h2>8. Contact Us</h2>
-                <p>If you have any questions about these Terms and Conditions, you can reach out via the app
-                    repository or main landing view:</p>
-                <ul class="help-list">
-                    <li>By visiting the app project site: <a href="https://iconstudio.ryanmarch.me/"
-                            target="_blank">https://iconstudio.ryanmarch.me/</a></li>
-                </ul>
-            </article>
+                            <h3>6. Governing Law</h3>
+                            <p>The laws of Ohio, United States, excluding its conflicts of law rules, shall govern these
+                                Terms and Your use of the Service.</p>
 
-            <hr class="section-divider">
+                            <h3>7. Termination</h3>
+                            <p>We reserve the right to restrict or terminate access to the Service immediately, without
+                                prior notice, if we detect abusive traffic patterns, server exploitation attempts, or clear
+                                violations of these Terms.</p>
 
-            <!-- Privacy Policy -->
-            <article id="privacy-policy" class="doc-section">
-                <h1>Privacy Policy</h1>
-                <p>Last updated: July 13, 2026</p>
-                <p>This Privacy Policy outlines how Icon Studio handles data. We believe in minimal data
-                    collection and processing transparency.</p>
+                            <h3>8. Contact Us</h3>
+                            <p>If you have any questions about these Terms and Conditions, you can reach out via the app
+                                repository or main landing view:</p>
+                            <ul class="help-list">
+                                <li>By visiting the app project site: <a href="https://iconstudio.ryanmarch.me/"
+                                        target="_blank">https://iconstudio.ryanmarch.me/</a></li>
+                            </ul>
+                        </article>
 
-                <h2>1. Data Collection & Usage</h2>
-                <p>We do not sell, rent, or monetize your information. We process data strictly to provide and
-                    maintain the application infrastructure:</p>
-                <ul class="help-list">
-                    <li><strong>Account Information:</strong> If you create an account, we collect your email address to
-                        authenticate logins and securely manage your user profile configurations.</li>
-                    <li><strong>Local Processing:</strong> All icon designs, color combinations, customization options, and export processes occur locally in your browser. We do not upload your custom templates, icon layers, or final design specifications to any remote servers.</li>
-                    <li><strong>Usage Data:</strong> Like most web applications, the servers automatically
-                        collect diagnostic metadata when you interact with the platform. This includes your IP
-                        address, browser type, visited pages, and the date/time of your interactions.</li>
-                </ul>
+                        <hr class="section-divider">
 
-                <h2>2. Infrastructure & Service Providers</h2>
-                <p>To deliver a fast, reliable utility, we rely on trusted, industry-standard infrastructure
-                    platforms. These services process your data in accordance with their respective security and
-                    privacy guidelines:</p>
-                <ul class="help-list">
-                    <li><strong>Cloudflare:</strong> Used for global web hosting, content delivery network (CDN)
-                        acceleration, security firewall mitigation, and standard server activity logging. <a
-                            href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare Privacy
-                            Policy</a></li>
-                    <li><strong>Cloudinary:</strong> Utilized for secure cloud asset optimization, media storage, and
-                        efficient image transformations. <a href="https://cloudinary.com/privacy"
-                            target="_blank">Cloudinary Privacy Policy</a></li>
-                </ul>
+                        <!-- Privacy Policy -->
+                        <article id="privacy-policy" class="doc-section">
+                            <h2>Privacy Policy</h2>
+                            <p>Last updated: July 13, 2026</p>
+                            <p>This Privacy Policy outlines how Icon Studio handles data. We believe in minimal data
+                                collection and processing transparency.</p>
 
-                <h2>3. Data Retention & Deletion</h2>
-                <ul class="help-list">
-                    <li><strong>Application Configurations:</strong> Active account data and user profile metrics are
-                        safely retained for the lifespan of your account plus up to 24 months after account closure to
-                        address potential post-termination sync or system requests. Any saved templates or designs kept locally in
-                        your browser's local storage are not transmitted or stored on remote databases.</li>
-                    <li><strong>Infrastructure Server Logs:</strong> Operational server telemetry and network
-                        security logs (including IP routing data) are kept for a maximum of 24 months strictly
-                        for stability troubleshooting, performance metrics, and malicious abuse detection.</li>
-                    <li><strong>User Control:</strong> You maintain the right to delete your personal profile data
-                        directly within your account settings layout at any time, or by submitting a system data removal
-                        request.</li>
-                </ul>
+                            <h3>1. Data Collection & Usage</h3>
+                            <p>We do not sell, rent, or monetize your information. We process data strictly to provide and
+                                maintain the application infrastructure:</p>
+                            <ul class="help-list">
+                                <li><strong>Account Information:</strong> If you create an account, we collect your email address to
+                                    authenticate logins and securely manage your user profile configurations.</li>
+                                <li><strong>Local Processing:</strong> All icon designs, color combinations, customization options, and export processes occur locally in your browser. We do not upload your custom templates, icon layers, or final design specifications to any remote servers.</li>
+                                <li><strong>Usage Data:</strong> Like most web applications, the servers automatically
+                                    collect diagnostic metadata when you interact with the platform. This includes your IP
+                                    address, browser type, visited pages, and the date/time of your interactions.</li>
+                            </ul>
 
-                <h2>4. Legal Compliance & Security</h2>
-                <p>While we apply rigorous, commercially reasonable security layers to guard transit pipelines,
-                    no internet protocol or server framework is 100% impenetrable. We do not expose metadata to
-                    external corporate parties unless strictly required to comply with an active legal mandate,
-                    court subpoena, or valid regulatory enforcement action.</p>
+                            <h3>2. Infrastructure & Service Providers</h3>
+                            <p>To deliver a fast, reliable utility, we rely on trusted, industry-standard infrastructure
+                                platforms. These services process your data in accordance with their respective security and
+                                privacy guidelines:</p>
+                            <ul class="help-list">
+                                <li><strong>Cloudflare:</strong> Used for global web hosting, content delivery network (CDN)
+                                    acceleration, security firewall mitigation, and standard server activity logging. <a
+                                        href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare Privacy
+                                        Policy</a></li>
+                                <li><strong>Cloudinary:</strong> Utilized for secure cloud asset optimization, media storage, and
+                                    efficient image transformations. <a href="https://cloudinary.com/privacy"
+                                        target="_blank">Cloudinary Privacy Policy</a></li>
+                            </ul>
 
-                <h2>5. Updates & Changes</h2>
-                <p>We update this policy occasionally to align with technical modifications or infrastructure
-                    shifts. Any policy updates will be reflected directly on this page with an updated "Last
-                    modified" timestamp.</p>
+                            <h3>3. Data Retention & Deletion</h3>
+                            <ul class="help-list">
+                                <li><strong>Application Configurations:</strong> Active account data and user profile metrics are
+                                    safely retained for the lifespan of your account plus up to 24 months after account closure to
+                                    address potential post-termination sync or system requests. Any saved templates or designs kept locally in
+                                    your browser's local storage are not transmitted or stored on remote databases.</li>
+                                <li><strong>Infrastructure Server Logs:</strong> Operational server telemetry and network
+                                    security logs (including IP routing data) are kept for a maximum of 24 months strictly
+                                    for stability troubleshooting, performance metrics, and malicious abuse detection.</li>
+                                <li><strong>User Control:</strong> You maintain the right to delete your personal profile data
+                                    directly within your account settings layout at any time, or by submitting a system data removal
+                                    request.</li>
+                            </ul>
 
-                <h2>6. Contact</h2>
-                <p>For questions or engineering queries regarding platform data processing layouts, please
-                    review the direct application root:</p>
-                <ul class="help-list">
-                    <li>Web Interface: <a href="https://iconstudio.ryanmarch.me/"
-                            target="_blank">https://iconstudio.ryanmarch.me/</a></li>
-                </ul>
-            </article>
+                            <h3>4. Legal Compliance & Security</h3>
+                            <p>While we apply rigorous, commercially reasonable security layers to guard transit pipelines,
+                                no internet protocol or server framework is 100% impenetrable. We do not expose metadata to
+                                external corporate parties unless strictly required to comply with an active legal mandate,
+                                court subpoena, or valid regulatory enforcement action.</p>
 
+                            <h3>5. Updates & Changes</h3>
+                            <p>We update this policy occasionally to align with technical modifications or infrastructure
+                                shifts. Any policy updates will be reflected directly on this page with an updated "Last
+                                modified" timestamp.</p>
+
+                            <h3>6. Contact</h3>
+                            <p>For questions or engineering queries regarding platform data processing layouts, please
+                                review the direct application root:</p>
+                            <ul class="help-list">
+                                <li>Web Interface: <a href="https://iconstudio.ryanmarch.me/"
+                                        target="_blank">https://iconstudio.ryanmarch.me/</a></li>
+                            </ul>
+                        </article>
+                    </section>
+                </docs-anchor-helper>
+            </div>
         </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
     </div>
-
-    <iconstudio-footer></iconstudio-footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.doc-section');
-            const navLinks = document.querySelectorAll('.sidebar-link');
-
-            function makeActive() {
-                let scrollPos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
-                scrollPos += 100;
-
-                for (let i = 0; i < sections.length; i++) {
-                    const section = sections[i];
-                    const top = section.offsetTop;
-                    const height = section.offsetHeight;
-
-                    if (scrollPos >= top && scrollPos < top + height) {
-                        const id = section.getAttribute('id');
-                        navLinks.forEach(link => {
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            } else {
-                                link.classList.remove('active');
-                            }
-                        });
-                        break;
-                    }
-                }
-            }
-
-            window.addEventListener('scroll', makeActive);
-            window.addEventListener('resize', makeActive);
-            setTimeout(makeActive, 100);
-        });
-    </script>
 </body>
 
 </html>
