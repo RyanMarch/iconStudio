@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <link class="favicon-link" rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png?v=2"
+        sizes="96x96" />
+    <link class="favicon-link" rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg?v=2" />
+    <link class="favicon-link" rel="shortcut icon" href="../../assets/favicon/favicon.ico?v=2" />
+    <link class="favicon-link" rel="apple-touch-icon" sizes="180x180"
+        href="../../assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link class="favicon-link" rel="manifest" href="../../assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        // Theme initialization to prevent flicker
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <title>Designing for Light and Dark Themes — Icon Studio Docs</title>
+    <meta name="description"
+        content="Technical guidelines for maintaining icon contrast across system themes using visual containers and dynamic picture sources.">
+    <meta name="category" content="Guides">
+    <meta name="doc-id" content="theme-contrast">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/support/theme-contrast/">
+
+    <!-- Docs Style Sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <docs-header></docs-header>
+    <div class="app-container">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
+            <!-- Sidebar Navigation -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
+
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="Designing for Light and Dark Themes Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>Designing for Light and Dark Themes</h1>
+                            <p class="lead">
+                                Modern user interfaces toggle between light and dark backgrounds and achieving
+                                sufficient
+                                contrast can be challenging. This guide outlines contrast requirements, border
+                                configurations, and dynamic markup methods to ensure icons remain visible on any
+                                background.
+                            </p>
+                        </article>
+
+                        <docs-table-of-contents></docs-table-of-contents>
+
+                        <hr class="section-divider">
+
+                        <article id="contrast-matters" class="doc-section">
+                            <h2>Contrast Matters</h2>
+                            <p>
+                                Transparent icons without background shapes can disappear when placed on backgrounds of a similar color.
+                            </p>
+                            <ul>
+                                <li><strong>Matching Colors:</strong> A dark-colored icon disappears on a dark interface. A light-colored icon disappears on a light interface.</li>
+                                <li><strong>Accessibility Guidelines:</strong> Graphic elements should maintain a minimum contrast ratio of 3:1 against their backgrounds to be readable.</li>
+                            </ul>
+                            <p>
+                                Compare the contrast outcomes across typical theme backgrounds:
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Icon Type</th>
+                                        <th>Light Background (#FFFFFF)</th>
+                                        <th>Dark Background (#121212)</th>
+                                        <th>Strategy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pure White SVG/PNG</td>
+                                        <td>Invisible (1:1 contrast)</td>
+                                        <td>Visible (21:1 contrast)</td>
+                                        <td>Needs dark-theme design or background container</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pure Black SVG/PNG</td>
+                                        <td>Visible (21:1 contrast)</td>
+                                        <td>Invisible (1:1 contrast)</td>
+                                        <td>Needs light-theme design or background container</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transparent + Container</td>
+                                        <td>Visible (> 4.5:1 contrast)</td>
+                                        <td>Visible (> 4.5:1 contrast)</td>
+                                        <td>Works on both themes</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="visual-boundaries" class="doc-section">
+                            <h2>Visual Boundaries</h2>
+                            <p>
+                                To guarantee visibility on varying canvas conditions, use one of the following geometric
+                                boundaries.
+                            </p>
+                            <h3>1. High-Contrast Borders</h3>
+                            <p>
+                                Apply an explicit border surrounding the icon symbol to isolate it from the underlying
+                                interface background:
+                            </p>
+                            <ul>
+                                <li><strong>Border Width:</strong> Use a thickness between 1px and 2px.</li>
+                                <li><strong>Border Color:</strong> Use a color opposite to the primary icon content, or
+                                    a high-contrast neutral color. For example, add a 1.5px solid white (#FFFFFF) border
+                                    to dark symbols.</li>
+                            </ul>
+                            <h3>2. Neutral Backing Containers</h3>
+                            <p>
+                                Embed the icon symbol inside a solid or semi-transparent background shape. This creates
+                                a predictable local contrast area regardless of the platform theme:
+                            </p>
+                            <ul>
+                                <li><strong>Opacity Range:</strong> Set the background color container between 8% and
+                                    15% opacity (for example, <code>rgba(0, 0, 0, 0.1)</code> for light backgrounds, or
+                                    <code>rgba(255, 255, 255, 0.1)</code> for dark backgrounds).
+                                </li>
+                                <li><strong>Corner Curvature:</strong> Use a squircle or circle container to align with
+                                    standard platform masks.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="dual-variant-implementation" class="doc-section">
+                            <h2>Dual-Variant Implementation</h2>
+                            <p>
+                                The standard method to dynamically load matching assets based on system color schemes is
+                                the HTML <code>&lt;picture&gt;</code> element.
+                            </p>
+                            <p>
+                                By matching media queries against the user's system preferences, the browser fetches and
+                                displays the correct asset variant without executing JavaScript.
+                            </p>
+                            <pre><code>&lt;picture&gt;
+  &lt;!-- Loaded when system dark mode is active --&gt;
+  &lt;source srcset="icon-home-32px-dark.png" media="(prefers-color-scheme: dark)"&gt;
+  
+  &lt;!-- Fallback loaded on light mode or unsupported browsers --&gt;
+  &lt;img src="icon-home-32px-light.png" alt="Home Icon" width="32" height="32"&gt;
+&lt;/picture&gt;</code></pre>
+                            <p>
+                                This implementation requires two distinct exported graphics:
+                            </p>
+                            <ol>
+                                <li><code>icon-home-32px-dark.png</code>: Configured with light colors for
+                                    dark interfaces.</li>
+                                <li><code>icon-home-32px-light.png</code>: Configured with dark colors for
+                                    light interfaces.</li>
+                            </ol>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>

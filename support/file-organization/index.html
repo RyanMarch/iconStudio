@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <link class="favicon-link" rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png?v=2"
+        sizes="96x96" />
+    <link class="favicon-link" rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg?v=2" />
+    <link class="favicon-link" rel="shortcut icon" href="../../assets/favicon/favicon.ico?v=2" />
+    <link class="favicon-link" rel="apple-touch-icon" sizes="180x180"
+        href="../../assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link class="favicon-link" rel="manifest" href="../../assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        // Theme initialization to prevent flicker
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <title>File Naming and Project Organization — Icon Studio Docs</title>
+    <meta name="description"
+        content="Technical instructions for structuring directories, formatting machine-readable asset names, and batch-renaming using fileNamer.">
+    <meta name="category" content="Guides">
+    <meta name="doc-id" content="file-organization">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/support/file-organization/">
+
+    <!-- Docs Style Sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <docs-header></docs-header>
+    <div class="app-container">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
+            <!-- Sidebar Navigation -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
+
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="File Naming and Project Organization Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>File Naming and Project Organization</h1>
+                            <p class="lead">
+                                Consistent asset organization prevents broken images on web servers and keeps project
+                                files organized. This document provides guidelines for managing icon directories and
+                                naming rules.
+                            </p>
+                        </article>
+
+                        <docs-table-of-contents></docs-table-of-contents>
+
+                        <hr class="section-divider">
+
+                        <article id="standardized-directory-structure" class="doc-section">
+                            <h2>Standardized Directory Structure</h2>
+                            <p>
+                                Separate your working files from final exports. Use the directory structure below:
+                            </p>
+                            <pre><code>my-project/
+├── raw/                 # Canvas saves and editable project files (.json, .sketch, .fig)
+├── source/              # Uncompressed source vector/raster graphics (.svg, .png)
+└── production/          # Optimized production assets scaled to targeted resolutions
+    ├── 16x16/           # 16px raster assets
+    ├── 32x32/           # 32px raster assets
+    └── 512x512/         # 512px raster assets</code></pre>
+                            <p>
+                                This separation ensures websites and build tools do not load raw working files by
+                                mistake.
+                            </p>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="machine-readable-naming-rules" class="doc-section">
+                            <h2>Machine-Readable Naming Rules</h2>
+                            <p>
+                                Follow strict naming rules to maintain compatibility across Mac, Linux, and Windows:
+                            </p>
+                            <ul>
+                                <li><strong>Character Set:</strong> Use lowercase alphanumeric characters
+                                    (<code>a-z</code>, <code>0-9</code>).</li>
+                                <li><strong>Separators:</strong> Use hyphens (<code>-</code>) to separate words. Do not
+                                    use spaces, periods, or underscores (<code>_</code>) as word separators.</li>
+                                <li><strong>Suffix Modifiers:</strong> Append the specific scale/dimensions and theme
+                                    variant as trailing segments.</li>
+                            </ul>
+                            <p>
+                                Refer to this schema when constructing filenames:
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Format</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Prefix Type</td>
+                                        <td>lowercase string</td>
+                                        <td><code>icon</code>, <code>logo</code>, <code>badge</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descriptor</td>
+                                        <td>kebab-case string</td>
+                                        <td><code>home</code>, <code>user-profile</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dimensions</td>
+                                        <td>[number]px</td>
+                                        <td><code>16px</code>, <code>32px</code>, <code>512px</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Theme/State</td>
+                                        <td>lowercase string</td>
+                                        <td><code>light</code>, <code>dark</code>, <code>active</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>
+                                Valid Filename Example: <code>icon-user-profile-32px-dark.png</code>
+                            </p>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="workflow-integration-with-filenamer" class="doc-section">
+                            <h2>Achieve Consistency with FileNamer</h2>
+                            <p>
+                                Manual renaming introduces human error. Use <a href="https://filenamer.ryanmarch.me/"
+                                    target="_blank" rel="noopener">FileNamer</a> to batch-process export outputs.
+                            </p>
+                            <h3>Configuration Steps</h3>
+                            <ol>
+                                <li>Navigate to <a href="https://filenamer.ryanmarch.me/app/?template=tpl-system-icons"
+                                        target="_blank" rel="noopener">FileNamer</a>.</li>
+                                <li>Load the exported PNG files into the drag-and-drop workspace zone.</li>
+                                <li>Set the naming pattern template in the schema configuration fields:
+                                    <pre><code>icon-{name}-{size}px-{theme}</code></pre>
+                                </li>
+                                <li>Define replacement parameters mapping your export layers to the template variables.
+                                </li>
+                                <li>Execute the batch processing engine to export the renamed files as a compressed
+                                    archive (.zip) containing the structured assets.</li>
+                            </ol>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>

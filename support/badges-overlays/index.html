@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <link class="favicon-link" rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png?v=2"
+        sizes="96x96" />
+    <link class="favicon-link" rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg?v=2" />
+    <link class="favicon-link" rel="shortcut icon" href="../../assets/favicon/favicon.ico?v=2" />
+    <link class="favicon-link" rel="apple-touch-icon" sizes="180x180"
+        href="../../assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link class="favicon-link" rel="manifest" href="../../assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        // Theme initialization to prevent flicker
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <title>Designing Badges and Overlays — Icon Studio Docs</title>
+    <meta name="description"
+        content="Master badge placement, scaling ratios, and background clearances to build layered, highly readable app icons.">
+    <meta name="category" content="Guides">
+    <meta name="doc-id" content="badges-overlays">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/support/badges-overlays/">
+
+    <!-- Docs Style Sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <docs-header></docs-header>
+    <div class="app-container">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
+            <!-- Sidebar Navigation -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
+
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="Designing Badges and Overlays Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>Designing Badges and Overlays</h1>
+                            <p class="lead">
+                                Badges and overlays add status indications or secondary contexts to your main icon
+                                design without cluttering the primary symbol.
+                            </p>
+                            <p>
+                                With Icon Studio's <strong>Badge</strong> controls, you can overlay secondary indicators
+                                in a way that remains clean and legible at small sizes. Proper design practices ensure
+                                these status badges do not compromise the visual hierarchy of your core design.
+                            </p>
+                        </article>
+
+                        <docs-table-of-contents></docs-table-of-contents>
+
+                        <hr class="section-divider">
+
+                        <article id="hierarchy-positioning" class="doc-section">
+                            <h2>Hierarchy & Positioning</h2>
+                            <p>
+                                A badge should always act as a secondary indicator. In Icon Studio, you can place badges
+                                using the <strong>Badge Position</strong> controls under the <strong>Badge</strong> tab:
+                            </p>
+                            <ul>
+                                <li><strong>Top L / Top R (Top Left / Top Right):</strong> Best for status alerts,
+                                    counts, or notification symbols.</li>
+                                <li><strong>Bottom L / Bottom R (Bottom Left / Bottom Right):</strong> Typically used
+                                    for action badges or user indicators. <strong>Bottom R</strong> is the default
+                                    position.</li>
+                                <li><strong>None:</strong> Removes the badge entirely to focus solely on the primary
+                                    canvas graphic.</li>
+                            </ul>
+                            <p>
+                                Ensure that the primary icon is aligned away from the badge's position. For example, if
+                                a badge is set to the bottom right, keep the base design elements toward the top left to
+                                keep the overall layout balanced.
+                            </p>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="scaling-ratios" class="doc-section">
+                            <h2>Scaling Ratios</h2>
+                            <p>
+                                Correct sizing proportions prevent a badge from either overwhelming the core design or
+                                becoming unreadable.
+                            </p>
+                            <ul>
+                                <li><strong>Badge Size:</strong> Controls the size of the badge container relative to
+                                    the main canvas.
+                                    <ul>
+                                        <li><em>Default (40%):</em> The ideal balance for standard logos.</li>
+                                        <li><em>Range (20% - 60%):</em> Adjust lower (20%-30%) for clean, subtle
+                                            additions, or higher (50%-60%) if the badge icon itself requires high
+                                            readability.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Badge Icon Scale:</strong> Adjusts the scale of the symbol inside the badge.
+                                    <ul>
+                                        <li><em>Default (70%):</em> Standard proportions.</li>
+                                        <li><em>Range (20% - 100%):</em> Adjust lower to increase the negative space
+                                            (clearance) around the symbol.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Badge Rotation:</strong> Rotates the badge container and icon from 0°
+                                    (default) to 360°. Useful for diamonds or directional arrow indicators.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="contrast-clearances" class="doc-section">
+                            <h2>Contrast and Clearances</h2>
+                            <p>
+                                To make a badge pop against your background, it must have clear isolation and sufficient
+                                contrast.
+                            </p>
+                            <h3>Badge Shapes</h3>
+                            <p>
+                                Select a shape from the <strong>Badge Shape</strong> selector to match your design
+                                system:
+                            </p>
+                            <ul>
+                                <li><strong>Circle:</strong> Provides the softest transition, isolating the badge neatly
+                                    on most backgrounds.</li>
+                                <li><strong>RoundRect / Squircle:</strong> Complements app designs that use rounded base
+                                    shapes.</li>
+                                <li><strong>Square:</strong> Delivers sharp, geometric contrast.</li>
+                                <li><strong>Hex V / Hex H:</strong> Vertical and horizontal hexagons provide a stylized
+                                    tech look.</li>
+                                <li><strong>Diamond / Shield:</strong> Excellent for security, gaming, or rating badges.
+                                </li>
+                            </ul>
+                            <h3>Smart Contrast & Isolation</h3>
+                            <p>
+                                To guarantee readable overlays, Icon Studio features an automated high-contrast
+                                rendering engine:
+                            </p>
+                            <ol>
+                                <li><strong>Clearance Borders:</strong> A built-in border surrounds the badge container
+                                    to separate it from the underlying base gradients and effects.</li>
+                                <li><strong>Auto Contrast:</strong> The badge icon dynamically adjusts its contrast
+                                    matching standard accessibility requirements, keeping the design legible even when
+                                    exported at high resolution.</li>
+                            </ol>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>
