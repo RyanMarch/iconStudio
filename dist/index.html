@@ -68,7 +68,7 @@
         <section class="hero-section">
             <div class="hero-showcase">
                 <div class="hero-col hero-col--left">
-                    <span class="pill-tag">No account required</span>
+                    <span class="pill-tag">No account required.</span>
                     <h1 class="hero-title">Design Stunning App Icons in Seconds</h1>
                     <p class="lead">Create icons with customizable badges, rich gradients, and multiple effects.</p>
                     <div class="hero-buttons">
@@ -144,11 +144,11 @@
         </section>
 
         <!-- How It Works Section -->
-        <section class="how-it-works-section" id="howItWorksSection">
+        <section class="how-it-works-section">
             <h2 class="section-title">Build Your Design</h2>
-            <p class="section-desc">Create your custom assets with endless customizability.</p>
+            <p class="section-desc">Create your custom assets with endless customizability:</p>
             <div class="steps-grid">
-                <div class="step-card card-left">
+                <div class="step-card">
                     <div class="step-image">
                         <div class="step-image-widget widget-customize" id="widgetCustomize">
                             <div class="widget-ui-panel">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
 
-                <div class="step-card card-right">
+                <div class="step-card">
                     <div class="step-image">
                         <div class="step-image-widget widget-badges" id="widgetBadges">
                             <div class="widget-preview-area">
@@ -225,7 +225,7 @@
                     </div>
                 </div>
 
-                <div class="step-card card-center">
+                <div class="step-card">
                     <div class="step-image">
                         <div class="step-image-widget widget-export" id="widgetExport">
                             <div class="widget-export-flow">
@@ -391,9 +391,10 @@
             <!-- Real-World Previews Grid -->
             <section class="real-world-section">
                 <h2 class="section-title">Designed for Your Real-World Workflow</h2>
-                <p class="section-desc">See how pre-badged icons fit seamlessly into your favorite apps and
+                <p class="section-desc">See how pre-badged icons fit seamlessly into your favorite applications and
                     devices.</p>
                 <div class="real-world-grid">
+                    <!-- SaaS In-App Sidebar -->
                     <div class="real-world-card">
                         <div class="real-world-mockup">
                             <div class="sidebar-mockup-frame">
@@ -442,7 +443,7 @@
                             </div>
                         </div>
                         <div class="real-world-info">
-                            <h3>Dashboard In-App Sidebar</h3>
+                            <h3>SaaS In-App Sidebar</h3>
                             <p>Highlight active files, new notifications, or pending user reviews with subtle badges in
                                 navigation sidebars.</p>
                         </div>
@@ -563,7 +564,9 @@
                             <div class="faq-content-inner">
                                 <p>Icon Studio supports exporting to high-resolution PNG format, perfect for app
                                     packaging.
-                                    You can also share your configuration instantly using deep links.</p>
+                                    You can also export SVG paths for use in other design tools, or share your
+                                    configuration
+                                    instantly using deep links.</p>
                             </div>
                         </div>
                     </div>
@@ -1102,44 +1105,6 @@
                 btnRollRandom.addEventListener('click', rollRandomIcon);
                 rollRandomIcon();
             }
-
-            // Staggered Cards Parallax Listener
-            const section = document.getElementById('howItWorksSection');
-            const cardLeft = document.querySelector('.step-card.card-left');
-            const cardRight = document.querySelector('.step-card.card-right');
-            const cardCenter = document.querySelector('.step-card.card-center');
-
-            function updateParallax() {
-                if (window.innerWidth <= 968) {
-                    if (cardLeft) cardLeft.style.transform = '';
-                    if (cardRight) cardRight.style.transform = '';
-                    if (cardCenter) cardCenter.style.transform = '';
-                    return;
-                }
-
-                if (!section) return;
-
-                const rect = section.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-
-                if (rect.top < viewportHeight && rect.bottom > 0) {
-                    const scrollDistance = viewportHeight - rect.top;
-
-                    if (cardLeft) {
-                        cardLeft.style.transform = `translateY(${scrollDistance * 0.05}px)`;
-                    }
-                    if (cardRight) {
-                        cardRight.style.transform = `translateY(${scrollDistance * -0.07}px)`;
-                    }
-                    if (cardCenter) {
-                        cardCenter.style.transform = `translateY(${scrollDistance * 0.03}px)`;
-                    }
-                }
-            }
-
-            window.addEventListener('scroll', updateParallax, { passive: true });
-            window.addEventListener('resize', updateParallax);
-            updateParallax();
         });
     </script>
 

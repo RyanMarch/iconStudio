@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <link class="favicon-link" rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png?v=2"
+        sizes="96x96" />
+    <link class="favicon-link" rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg?v=2" />
+    <link class="favicon-link" rel="shortcut icon" href="../../assets/favicon/favicon.ico?v=2" />
+    <link class="favicon-link" rel="apple-touch-icon" sizes="180x180"
+        href="../../assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link class="favicon-link" rel="manifest" href="../../assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        // Theme initialization to prevent flicker
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <title>Optimizing Safe Zones and Padding — Icon Studio Docs</title>
+    <meta name="description"
+        content="Learn how to configure canvas margins, use the blueprint grid, and design safe layouts that adapt to OS shape masks.">
+    <meta name="category" content="Guides">
+    <meta name="doc-id" content="safe-zones">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/support/safe-zones/">
+
+    <!-- Docs Style Sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <docs-header></docs-header>
+    <div class="app-container">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
+            <!-- Sidebar Navigation -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
+
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="Optimizing Safe Zones and Padding Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>Optimizing Safe Zones and Padding</h1>
+                            <p class="lead">
+                                Every operating system and platform applies its own mask overlay to your exported
+                                assets. Learn how to optimize safe zones and padding so your designs always look
+                                perfect.
+                            </p>
+                            <p>
+                                When you export a <strong>1024x1024</strong> icon from Icon Studio, the outer edges of
+                                the asset may be cropped depending on where the icon is displayed. Designing with a
+                                clear understanding of shapes, grids, and padding limits ensures key graphical elements
+                                remain fully visible.
+                            </p>
+                        </article>
+
+                        <docs-table-of-contents></docs-table-of-contents>
+
+                        <hr class="section-divider">
+
+                        <article id="os-shape-masks" class="doc-section">
+                            <h2>OS Shape Masks</h2>
+                            <p>
+                                Modern platforms use varying geometries to crop icon designs. Under the
+                                <strong>Base</strong> tab in the sidebar controls, you can set the <strong>Base
+                                    Shape</strong> to preview how your design adapts to these masks:
+                            </p>
+                            <ul>
+                                <li><strong>Squircle:</strong> A hybrid of a square and a circle, popularized by Apple
+                                    (iOS/macOS). It features smooth, continuous curvature corners that clip more area
+                                    than a traditional rounded rectangle.</li>
+                                <li><strong>RoundRect:</strong> A standard rounded rectangle, common on Android
+                                    platforms and custom desktop launchers.</li>
+                                <li><strong>Circle:</strong> A full circular crop, utilized extensively by Android
+                                    (Adaptive Icons), Google Play, and web applications.</li>
+                                <li><strong>Square:</strong> A standard square shape with sharp 90-degree corners. While
+                                    this shows the full bounds of your icon canvas, it is rarely the final shape shown
+                                    to users on devices.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="blueprint-grid" class="doc-section">
+                            <h2>The Blueprint Grid</h2>
+                            <p>
+                                Finding the balance between geometric alignment and visual balance is key to
+                                professional icon design.
+                            </p>
+                            <h3>Optical vs. Geometric Centering</h3>
+                            <p>
+                                A common mistake is placing asymmetric shapes (like triangles, play arrows, or stars)
+                                strictly in the geometric center of the canvas. Because of weight distribution, this
+                                often looks off-center to the human eye.
+                            </p>
+                            <p>
+                                To achieve optical balance:
+                            </p>
+                            <ul>
+                                <li>Identify the visual mass of the symbol.</li>
+                                <li>Nudge the element slightly away from the heavier side (for example, a play icon
+                                    triangle should be nudged slightly right of the geometric center).</li>
+                                <li>Toggle between different <strong>Base Shapes</strong> (especially Circle vs.
+                                    Squircle) to verify the visual weight remains balanced under various masks.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="padding-best-practices" class="doc-section">
+                            <h2>Padding Best Practices</h2>
+                            <p>
+                                Leaving enough breathing room around your central graphic prevents it from looking
+                                cramped or getting clipped by platform masks.
+                            </p>
+                            <h3>Configuring Base Size</h3>
+                            <p>
+                                In the <strong>Base</strong> tab, use the <strong>Base Size</strong> slider to define
+                                the outer margin.
+                            </p>
+                            <ul>
+                                <li><strong>Default (80%):</strong> The recommended standard. This leaves a balanced 10%
+                                    safety margin on all sides (equal to 102 pixels on a 1024px canvas).</li>
+                                <li><strong>Maximum (100%):</strong> Expands the icon background to fill the canvas
+                                    entirely. Use this if you are designing a full-bleed background pattern or gradient,
+                                    but ensure internal symbols/text are scaled down.</li>
+                                <li><strong>Minimum (50%):</strong> Useful for creating small, badge-like core designs
+                                    or embedding highly detailed shapes.</li>
+                            </ul>
+
+                            <h3>Social Media and Profile Avatar Crops</h3>
+                            <p>
+                                Social media networks and communication platforms (such as LinkedIn, GitHub, Gravatar,
+                                and Mastodon) apply a strict circular mask to profile pictures and custom icons.
+                            </p>
+                            <ul>
+                                <li><strong>LinkedIn:</strong> Uses a circular crop. Ensure all readable text and core
+                                    branding stay within the center 60% of the canvas.</li>
+                                <li><strong>GitHub & Mastodon:</strong> Crop avatars to circles. Avoid placing any
+                                    critical symbols near the extreme corners.</li>
+                                <li><strong>Gravatar:</strong> Standardizes on circular crops across various integrated
+                                    services.</li>
+                            </ul>
+                            <p>
+                                When designing profile graphics, set the <strong>Base Shape</strong> to
+                                <strong>Circle</strong> and lower the <strong>Base Size</strong> to <strong>70% or
+                                    75%</strong> to guarantee important brand details aren't cut off by circular crops.
+                            </p>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="testing-layout" class="doc-section">
+                            <h2>Testing Your Layout</h2>
+                            <p>
+                                Use this checklist before exporting your design to ensure maximum compatibility:
+                            </p>
+                            <div class="checklist-box">
+                                <ul>
+                                    <li>Verify your icon in the <strong>Circle</strong> preview to check for extreme
+                                        corner clipping.</li>
+                                    <li>Switch the preview to <strong>Squircle</strong> to test corner smoothness.</li>
+                                    <li>Keep text length under 10 characters or use the <strong>Base Icon Scale</strong>
+                                        slider to shrink text if it nears borders.</li>
+                                    <li>If a badge is active, confirm the badge doesn't cover crucial details of the
+                                        main image.</li>
+                                </ul>
+                            </div>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>

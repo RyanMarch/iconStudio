@@ -1,0 +1,96 @@
+[
+  {
+    "id": "get-started",
+    "title": "Getting Started",
+    "path": "get-started/",
+    "category": "Basics",
+    "headings": [
+      "Overview",
+      "Workspace Layout",
+      "Creating Your First Icon",
+      "Exporting Designs",
+      "PNG Export",
+      "Sharing & Collaboration"
+    ],
+    "excerpt": "Learn how to set up, configure, and design your first icon with Icon Studio.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "favicon-packages",
+    "title": "Creating Multi-Resolution Favicon Packages",
+    "path": "favicon-packages/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "The Modern Web Standard",
+      "Target Sizes Checklist",
+      "Assembly &amp; Manifests",
+      "HTML Header Snippet",
+      "Structure of site.webmanifest"
+    ],
+    "excerpt": "Build modern favicon packages using HTML and PNG targets. Learn dimensions, markup linking, and webmanifest configurations.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "badges-overlays",
+    "title": "Designing Badges and Overlays",
+    "path": "badges-overlays/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "Hierarchy & Positioning",
+      "Scaling Ratios",
+      "Contrast and Clearances",
+      "Badge Shapes",
+      "Smart Contrast & Isolation"
+    ],
+    "excerpt": "Master badge placement, scaling ratios, and background clearances to build layered, highly readable app icons.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "safe-zones",
+    "title": "Optimizing Safe Zones and Padding",
+    "path": "safe-zones/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "OS Shape Masks",
+      "The Blueprint Grid",
+      "Optical vs. Geometric Centering",
+      "Padding Best Practices",
+      "Configuring Base Size",
+      "Social Media and Profile Avatar Crops",
+      "Testing Your Layout"
+    ],
+    "excerpt": "Learn how to configure canvas margins, use the blueprint grid, and design safe layouts that adapt to OS shape masks.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "theme-contrast",
+    "title": "Designing for Light and Dark Themes",
+    "path": "theme-contrast/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "Contrast Matters",
+      "Visual Boundaries",
+      "Dual-Variant Implementation"
+    ],
+    "excerpt": "Technical guidelines for maintaining icon contrast across system themes using visual containers and dynamic picture sources.",
+    "lastUpdated": "2026-07-14"
+  },
+  {
+    "id": "file-organization",
+    "title": "File Naming and Project Organization",
+    "path": "file-organization/",
+    "category": "Guides",
+    "headings": [
+      "Overview",
+      "Standardized Directory Structure",
+      "Machine-Readable Naming Rules",
+      "Workflow Integration with fileNamer"
+    ],
+    "excerpt": "Technical instructions for structuring directories, formatting machine-readable asset names, and batch-renaming using fileNamer.",
+    "lastUpdated": "2026-07-14"
+  }
+]

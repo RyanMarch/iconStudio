@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <link class="favicon-link" rel="icon" type="image/png" href="../../assets/favicon/favicon-96x96.png?v=2"
+        sizes="96x96" />
+    <link class="favicon-link" rel="icon" type="image/svg+xml" href="../../assets/favicon/favicon.svg?v=2" />
+    <link class="favicon-link" rel="shortcut icon" href="../../assets/favicon/favicon.ico?v=2" />
+    <link class="favicon-link" rel="apple-touch-icon" sizes="180x180"
+        href="../../assets/favicon/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="Icon Studio" />
+    <link class="favicon-link" rel="manifest" href="../../assets/favicon/site.webmanifest?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="google" content="notranslate">
+    <script>
+        // Theme initialization to prevent flicker
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme-mode', 'system');
+            } else {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                document.documentElement.removeAttribute('data-theme-mode');
+            }
+        })();
+    </script>
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <title>Getting Started — Icon Studio Docs</title>
+    <meta name="description" content="Learn how to set up, configure, and design your first icon with Icon Studio.">
+    <meta name="category" content="Basics">
+    <meta name="doc-id" content="get-started">
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/support/get-started/">
+
+    <!-- Docs Style Sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <script src="../docs-components.js" type="module"></script>
+</head>
+
+<body class="user-docs-page">
+    <docs-header></docs-header>
+    <div class="app-container">
+        <!-- Mobile Navigation Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
+
+        <main class="page-container-sidebar user-docs">
+            <!-- Sidebar Navigation -->
+            <docs-sidebar></docs-sidebar>
+
+            <!-- Right-side Content Wrapper -->
+            <div class="page-content-wrapper">
+
+                <!-- Content Area -->
+                <docs-anchor-helper>
+                    <section class="page-content" aria-label="Getting Started Content">
+
+                        <article id="overview" class="doc-section">
+                            <h1>Getting Started</h1>
+                            <p class="lead">
+                                Welcome to Icon Studio! This guide will help you understand the interface and build your
+                                very first customized icon from scratch.
+                            </p>
+                            <p>
+                                Icon Studio provides a real-time canvas where you can customize layouts, symbols,
+                                gradients, and badges to design assets for websites, mobile applications, or anything
+                                you can think of.
+                            </p>
+                        </article>
+
+                        <docs-table-of-contents></docs-table-of-contents>
+
+                        <hr class="section-divider">
+
+                        <article id="workspace-layout" class="doc-section">
+                            <h2>Workspace Layout</h2>
+                            <p>
+                                The workspace is split into two primary areas:
+                            </p>
+                            <ul>
+                                <li><strong>The Preview Canvas:</strong> Displays your icon layout and customizations in
+                                    real time.</li>
+                                <li><strong>The Tools Sidebar:</strong> Contains panels for configuring the base layer,
+                                    style properties, gradients, borders, and badge overlays.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="creating-first-icon" class="doc-section">
+                            <h2>Creating Your First Icon</h2>
+                            <p>
+                                To begin design customization, navigate to the sidebar options:
+                            </p>
+                            <ol>
+                                <li><strong>Choose a Base Layer:</strong> Choose between an <em>Icon</em>, custom
+                                    <em>Text</em>, or your own uploaded <em>Image</em>.
+                                </li>
+                                <li><strong>Adjust Canvas Styles:</strong> Select background properties like solid
+                                    colors or multi-color gradients. You can also customize border radius, padding, and
+                                    drop shadows.</li>
+                                <li><strong>Configure Badges:</strong> Optionally add an icon inside a badge to the
+                                    corner of your icon for a layered effect.</li>
+                            </ol>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="exporting" class="doc-section">
+                            <h2>Exporting Designs</h2>
+                            <p>
+                                Once your icon is ready, you can can choose your export format to suit your needs.
+                                Icon Studio supports exporting high-resolution PNGs.
+                            </p>
+                        </article>
+
+                        <article id="png-export" class="doc-section">
+                            <h3>PNG Export</h3>
+                            <p>
+                                PNG is best for standard web and app assets where you need a fixed pixel dimension:
+                            </p>
+                            <ul>
+                                <li>Click the <strong>Export PNG</strong> button in the primary actions section.</li>
+                                <li>The PNG is rendered at high resolution to ensure crisp assets even on high-DPI
+                                    (Retina) screens.</li>
+                                <li>Transparency is preserved outside the custom icon container boundary.</li>
+                            </ul>
+                        </article>
+
+                        <hr class="section-divider">
+
+                        <article id="sharing" class="doc-section">
+                            <h2>Sharing & Collaboration</h2>
+                            <p>
+                                Icon Studio includes built-in sharing and collaboration features. To generate a unique
+                                link
+                                containing your current configuration:
+                            </p>
+                            <ol>
+                                <li>Click the <strong>Share Design</strong> button in the primary actions section.</li>
+                                <li>The current layout, color parameters, and configuration properties are compressed
+                                    into query
+                                    parameters and copied to your clipboard automatically.</li>
+                                <li>Send this link to anyone to let them view and edit the exact design.</li>
+                            </ol>
+                        </article>
+
+                    </section>
+                </docs-anchor-helper>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <docs-footer></docs-footer>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true" role="dialog" aria-label="Image Viewer">
+            <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+</body>
+
+</html>

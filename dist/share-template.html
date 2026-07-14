@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Studio | View Shared Design</title>
+    
+    <!-- Open Graph / iMessage Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Icon Studio">
+    <meta property="og:title" content="View Shared Design | Icon Studio">
+    <meta property="og:description" content="Someone shared a custom icon design with you. Click to view or edit it in Icon Studio.">
+    <meta property="og:image" content="https://iconstudio.ryanmarch.me/assets/favicon/web-app-manifest-512x512.png">
+    <meta property="og:url" content="https://iconstudio.ryanmarch.me/">
+    
+    <!-- SEO Directives -->
+    <link rel="canonical" href="https://iconstudio.ryanmarch.me/">
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#3b82f6">
+
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+        }
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        h1 { font-size: 1.5rem; font-weight: 600; margin: 0; }
+        p { color: #94a3b8; margin: 0; }
+        a { color: #3b82f6; text-decoration: none; font-size: 0.9rem; margin-top: 1rem; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+    </style>
+
+    <script>
+        // Smoothly redirect to the main app while preserving all URL parameters
+        (function() {
+            try {
+                const currentUrl = new URL(window.location.href);
+                // Redirect to the root path with the same search parameters
+                const targetUrl = new URL('/', window.location.origin);
+                targetUrl.search = currentUrl.search;
+                window.location.replace(targetUrl.toString());
+            } catch (e) {
+                // Fallback to basic redirect if URL API fails
+                window.location.replace('/' + window.location.search);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <div class="text">
+            <h1>Opening Shared Design</h1>
+            <p>Redirecting to Icon Studio...</p>
+        </div>
+        <noscript>
+            <a href="/">Click here to open Icon Studio</a>
+        </noscript>
+    </div>
+</body>
+</html>
