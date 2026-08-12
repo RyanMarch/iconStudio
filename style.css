@@ -2736,8 +2736,8 @@ button,
     }
 }
 
-/* 2.5 Standalone / PWA (Added to Home Screen) Mode Optimization (Portrait Only) */
-@media ((display-mode: standalone) or (display-mode: minimal-ui)) and (max-width: 1150px) and (min-height: 501px) {
+/* 2.5 Standalone / PWA (Added to Home Screen) Mode Optimization (Portrait + Landscape, covers iPad Air 11" 1180px landscape width) */
+@media ((display-mode: standalone) or (display-mode: minimal-ui)) and (max-width: 1200px) and (min-height: 501px) {
     body {
         padding: 0 !important;
         margin: 0 !important;
@@ -2779,8 +2779,8 @@ button,
     }
 }
 
-/* Also support it via body.standalone-mode class added by JavaScript (Portrait Only) */
-@media (max-width: 1150px) and (min-height: 501px) {
+/* Also support it via body.standalone-mode class added by JavaScript (Portrait + Landscape) */
+@media (max-width: 1200px) and (min-height: 501px) {
     body.standalone-mode {
         padding: 0 !important;
         margin: 0 !important;
