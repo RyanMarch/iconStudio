@@ -992,26 +992,40 @@ h1 {
     }
 
     .preview-section .app-header {
-        height: calc(60px - 25px * var(--scroll-progress, 0)) !important;
+        height: calc(60px - 12px * var(--scroll-progress, 0)) !important;
         overflow: hidden !important;
         transition: none !important;
+    }
+
+    .preview-section .app-header:has(.header-nav.active) {
+        overflow: visible !important;
     }
 
     .preview-section .icon-canvas-wrapper {
         transform: scale(calc(1 - 0.35 * var(--scroll-progress, 0))) !important;
         margin-top: calc(0px - 25px * var(--scroll-progress, 0)) !important;
-        margin-bottom: calc(-15px - 100px * var(--scroll-progress, 0)) !important;
+        margin-bottom: calc(-10px - 100px * var(--scroll-progress, 0)) !important;
         transition: none !important;
     }
 
     .preview-section .preview-actions {
-        margin-top: calc(0px - 5px * var(--scroll-progress, 0)) !important;
+        margin-top: calc(5px - 5px * var(--scroll-progress, 0)) !important;
         transform: scale(calc(1 - 0.05 * var(--scroll-progress, 0))) !important;
+        transition: none !important;
+    }
+
+    .preview-section .preview-actions button {
+        padding-top: calc(0.6rem - 0.3rem * var(--scroll-progress, 0)) !important;
+        padding-bottom: calc(0.6rem - 0.3rem * var(--scroll-progress, 0)) !important;
         transition: none !important;
     }
 
     body.scrolled .preview-section .app-header {
         pointer-events: none;
+    }
+
+    body.scrolled .preview-section .app-header .header-actions {
+        pointer-events: auto;
     }
 }
 
@@ -1466,6 +1480,12 @@ input[type="text"]:focus {
 
     .preview-actions .btn-screenshot-mode {
         display: none !important;
+    }
+
+    .preview-actions button {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
     }
 }
 
@@ -3969,6 +3989,7 @@ body.marketing-home {
     display: none;
     position: absolute;
     top: 100%;
+    left: auto;
     right: 0;
     background: var(--dropdown-bg);
     backdrop-filter: blur(24px);

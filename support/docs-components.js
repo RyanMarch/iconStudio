@@ -849,7 +849,7 @@ class DocsSearch extends HTMLElement {
     connectedCallback() {
         this.style.display = 'contents';
 
-        const isMobile = window.matchMedia('(pointer: coarse)').matches;
+        const isMobile = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 768px)').matches;
         const placeholderText = isMobile ? 'Search guides...' : "Search guides... (press '/' to focus)";
         const kbdContent = isMobile ? '' : '/';
 
@@ -1213,7 +1213,7 @@ class DocsFooter extends HTMLElement {
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
-                const currentTheme = localStorage.getItem('theme') || 'light';
+                const currentTheme = localStorage.getItem('theme') || 'dark';
                 let newTheme = currentTheme === 'dark' ? 'light' : currentTheme === 'light' ? 'system' : 'dark';
                 let statusText = newTheme === 'light' ? 'Light Theme' : newTheme === 'system' ? 'System Theme' : 'Dark Theme';
 
