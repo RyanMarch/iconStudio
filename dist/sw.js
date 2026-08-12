@@ -1,15 +1,19 @@
-const CACHE_NAME = 'iconstudio-v4.0.3';
+const CACHE_NAME = 'iconstudio-v4.0.5';
 const ASSETS = [
     '/',
     '/index.html',
+    '/app/',
+    '/app/index.html',
     '/style.css',
     '/script.js',
+    '/js/components.js',
     '/assets/img/base-placeholder.svg',
     '/assets/favicon/favicon-96x96.png',
     '/assets/favicon/favicon.svg',
     '/assets/favicon/favicon.ico',
     '/assets/favicon/apple-touch-icon.png',
     '/assets/favicon/site.webmanifest',
+    '/app/manifest.webmanifest',
     '/assets/favicon/web-app-manifest-192x192.png',
     '/assets/favicon/web-app-manifest-512x512.png'
 ];
@@ -79,9 +83,9 @@ self.addEventListener('fetch', (event) => {
                 }
                 return networkResponse;
             }).catch(() => {
-                // If offline and requesting the page, return index.html
+                // If offline and requesting a page, return the matching shell for that section
                 if (event.request.mode === 'navigate') {
-                    return caches.match('/');
+                    return url.pathname.startsWith('/app/') ? caches.match('/app/') : caches.match('/');
                 }
             });
         })

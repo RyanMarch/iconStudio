@@ -78,7 +78,7 @@ export async function onRequest(context) {
 <body>
     <script data-cfasync="false">
         (function() {
-            window.location.replace('/' + window.location.search);
+            window.location.replace('/app/' + window.location.search);
         })();
     </script>
 </body>
