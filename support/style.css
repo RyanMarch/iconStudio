@@ -1070,7 +1070,7 @@ ul.toc-list {
     background-color: var(--bg-main);
 }
 
-@media (pointer: coarse) {
+@media (pointer: coarse), (max-width: 768px) {
     .search-kbd {
         display: none !important;
     }

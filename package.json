@@ -4,8 +4,8 @@
   "description": "Icon Studio - Icon Generator",
   "main": "script.js",
   "scripts": {
-    "build": "mkdir -p dist dist/app dist/support dist/terms && cp index.html share-template.html sw.js robots.txt sitemap.xml dist/ && cp app/index.html dist/app/ && cp -r support/* dist/support/ && cp -r terms/* dist/terms/ && cp -r assets dist/ && cp -r js dist/ && esbuild script.js --minify --outfile=dist/script.js && esbuild style.css --minify --outfile=dist/style.css",
-    "dev": "wrangler pages dev .",
+    "build": "mkdir -p dist dist/app dist/support dist/terms && cp index.html share-template.html sw.js robots.txt sitemap.xml dist/ && cp app/index.html app/manifest.webmanifest dist/app/ && cp -r support/* dist/support/ && cp -r terms/* dist/terms/ && cp -r assets dist/ && cp -r js dist/ && esbuild script.js --minify --outfile=dist/script.js && esbuild style.css --minify --outfile=dist/style.css",
+    "dev": "wrangler pages dev . --port 8789",
     "docs:init": "node scripts/init-docs.js",
     "docs:new": "node scripts/add-new-doc.js",
     "docs:build": "node scripts/generate-docs-index.js"

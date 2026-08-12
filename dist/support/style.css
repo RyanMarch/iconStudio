@@ -244,7 +244,7 @@ a.site-signature {
 .page-sidebar ul {
     list-style: none;
     padding: 0;
-    margin: 1.5rem 0 0 0;
+    margin: 3rem 0 0.3rem 0;
     display: flex;
     flex-direction: column;
 }
@@ -979,10 +979,11 @@ ul.toc-list {
 }
 
 /* --- Sublist Navigation Styles --- */
-.sidebar-sublist {
+.sidebar-sublist,
+.sidebar-sublist ul {
     list-style: none !important;
     padding: 0 0 0 1rem !important;
-    /* margin: 0.25rem 0 0.5rem 0 !important; */
+    margin: 0.25rem 0 0.5rem 0 !important;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -2210,4 +2211,36 @@ docs-logo svg {
 [data-theme-mode="system"] .system-icon {
     opacity: 1;
     transform: rotate(0) scale(1);
+}
+
+/* Ensure tables take up appropriate space and don't collapse */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Add clear vertical spacing and clean horizontal borders */
+th,
+td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    /* Light gray divider */
+}
+
+/* Make headers visually distinct */
+th {
+    font-weight: 600;
+    color: #1a202c;
+    background-color: #f7fafc;
+    /* Subtle header background */
+}
+
+/* Add a touch of horizontal separation between columns */
+td:not(:last-child),
+th:not(:last-child) {
+    padding-right: 24px;
 }
